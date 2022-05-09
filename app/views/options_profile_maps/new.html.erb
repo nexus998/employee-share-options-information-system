@@ -1,0 +1,63 @@
+<style>
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=100%);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+  }
+</style>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"><%=t('.title') %></h6>
+    </div>
+    <div class="card-body" style="padding:1rem;">
+        <p><%=t('.description') %></p>
+    </div>
+</div>
+
+<%= form_tag '/options_profile_mapping/import', multipart: true do %>
+  <a class="btn btn-primary btn-icon-split btn-file">
+    <span class="icon text-white-50">
+        <%= material_icon.file_upload.md_18 %>
+    </span>
+
+    <span class="text"><%=t('shared.select_file') %></span>
+    <%= file_field_tag :mapping_file %>
+  </a>
+  <br>
+  <br>
+  <div>
+    <%= submit_tag t('shared.import'), class: "btn btn-primary btn-user btn-block btn-rounded" %>
+  </div>
+<% end %>
+<br>
+<br>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"><%=t('.missing_title') %></h6>
+    </div>
+    <div class="card-body" style="padding:1rem;">
+        <p><%=t('.missing_description') %></p>
+        <%= link_to '/options_profile_mapping/remove_all', class: "btn btn-danger btn-icon-split", method: :delete, data: {"confirm": "Are you sure?"} do %>
+          <span class="icon text-white-50">
+              <%= material_icon.delete %>
+          </span>
+          <span class="text"><%=t('.delete_button') %></span>
+        <% end %>
+    </div>
+</div>
+<br>

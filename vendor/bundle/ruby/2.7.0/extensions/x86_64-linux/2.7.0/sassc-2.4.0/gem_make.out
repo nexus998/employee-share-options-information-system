@@ -1,0 +1,14 @@
+current directory: /home/minde/employee-share-options/vendor/bundle/ruby/2.7.0/gems/sassc-2.4.0/ext
+/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20220407-3650-8jv5nj.rb extconf.rb
+creating Makefile
+
+current directory: /home/minde/employee-share-options/vendor/bundle/ruby/2.7.0/gems/sassc-2.4.0/ext
+make "DESTDIR=" clean
+
+current directory: /home/minde/employee-share-options/vendor/bundle/ruby/2.7.0/gems/sassc-2.4.0/ext
+make "DESTDIR="
+compiling ./libsass/src/memory/allocator.cpp
+make: x86_64-linux-gnu-g++: Command not found
+make: *** [Makefile:237: allocator.o] Error 127
+
+make failed, exit code 2

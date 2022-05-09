@@ -1,0 +1,40 @@
+
+
+
+<%= form_with(model: valuation, class: "user") do |form| %>
+  <% if valuation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(valuation.errors.count, "error") %> prohibited this valuation from being saved:</h2>
+
+      <ul>
+        <% valuation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :market_price, style: "display: block" %>
+    <%= form.text_field :market_price, class: "form-control form-control-user" %>
+  </div>
+
+  <div>
+    <%= form.label :strike_price, style: "display: block" %>
+    <%= form.text_field :strike_price, class: "form-control form-control-user" %>
+  </div>
+
+  <div>
+    <%= form.label :effective_date, style: "display: block" %>
+    <%= form.date_field :effective_date, class: "form-control form-control-user" %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description, class: "form-control form-control-user" %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit class: "btn btn-primary btn-user btn-block btn-rounded" %>
+  </div>
+<% end %>

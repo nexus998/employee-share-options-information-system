@@ -1,0 +1,10 @@
+
+<%= link_to fields_path, class: "btn btn-primary btn-circle btn-lg" do %>
+  <%= material_icon.arrow_back.md_24 %>
+<% end %>
+<br>
+<br>
+<h1 class="h3 mb-0 text-gray-800"><%= @field.name %></h1>
+<div class="h8 mb-0 font-weight-bold text-gray-800"><%= t('shared.last_updated') %> <%= @field.updated_at %></div>
+<div style="margin-top:10px;"> </div>
+<%= render @field %>

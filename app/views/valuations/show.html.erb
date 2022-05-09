@@ -1,0 +1,12 @@
+
+
+<%= link_to valuations_path, class: "btn btn-primary btn-circle btn-lg" do %>
+  <%= material_icon.arrow_back.md_24 %>
+<% end %>
+<br>
+<br>
+
+<h1 class="h3 mb-0 text-gray-800"><%=t('.val') %> <%= @valuation.effective_date %></h1>
+<div class="h8 mb-0 font-weight-bold text-gray-800"><%=t('last_updated') %> <%= @valuation.updated_at %></div>
+<div style="margin-top:10px;"> </div>
+<%= render @valuation %>

@@ -1,0 +1,58 @@
+<%= form_with(model: options_calculation, class: "user") do |form| %>
+  <% if options_calculation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(options_calculation.errors.count, "error") %> prohibited this options_calculation from being saved:</h2>
+
+      <ul>
+        <% options_calculation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%
+=begin%>
+ <div>
+    <%= form.label :employee_id, style: "display: block" %>
+    <%= form.text_field :employee_id, class: "form-control form-control-user" %>
+  </div>
+<%
+=end%>
+
+  <div>
+    <%= form.label :grant_date, style: "display: block" %>
+    <%= form.date_field :grant_date, class: "form-control form-control-user" %>
+  </div>
+
+  <div>
+    <%= form.label :vesting_start_date, style: "display: block" %>
+    <%= form.date_field :vesting_start_date, class: "form-control form-control-user" %>
+  </div>
+
+  <div>
+    <%= form.label :cliff, style: "display: block" %>
+    <%= form.number_field :cliff, class: "form-control form-control-user" %>
+  </div>
+
+  <div>
+    <%= form.label :tranches, style: "display: block" %>
+    <%= form.number_field :tranches, class: "form-control form-control-user" %>
+  </div>
+
+  <div>
+    <%= form.label :grant_type_id, style: "display: block" %>
+    <%= form.select :grant_type_id, @grant_type_names,
+    {}, { :class => "btn btn-block btn-rounded",
+          :style => "background-color: white;border-color: #d1d3e2;" } %>
+  </div>
+
+  <div>
+    <%= form.label :share_number, style: "display: block" %>
+    <%= form.text_field :share_number, class: "form-control form-control-user" %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit class: "btn btn-primary btn-user btn-block btn-rounded" %>
+  </div>
+<% end %>

@@ -1,0 +1,72 @@
+
+<div class="" id="<%= dom_id options_calculation %>">
+    <div class="card border-left-primary py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<%= dom_id options_calculation %>">
+                    <div class="col mr-2">
+                        <div class="text-xl font-weight-bold text-primary mb-1">
+                          <%= options_calculation.grant_type.name %> </span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div id="collapse_<%= dom_id options_calculation %>" class="accordion-collapse" data-bs-parent="#<%= dom_id options_calculation %>">
+                        <div class="accordion-body">
+                          <p>
+                              <strong>Employee:</strong>
+                              <%= options_calculation.employee_id %>
+                            </p>
+
+                            <p>
+                              <strong>Grant date:</strong>
+                              <%= options_calculation.grant_date %>
+                            </p>
+
+                            <p>
+                              <strong>Vesting start date:</strong>
+                              <%= options_calculation.vesting_start_date %>
+                            </p>
+
+                            <p>
+                              <strong>Cliff:</strong>
+                              <%= options_calculation.cliff %>
+                            </p>
+
+                            <p>
+                              <strong>Tranches:</strong>
+                              <%= options_calculation.tranches %>
+                            </p>
+
+                            <p>
+                              <strong>Grant type:</strong>
+                              <%= options_calculation.grant_type_id %>
+                            </p>
+
+                            <p>
+                              <strong>Share number:</strong>
+                              <%= options_calculation.share_number %>
+                            </p>
+                            <br>
+                            <span style="display:inline-flex; flex-wrap:wrap;gap:0.25rem;">
+                                <a href="<%= edit_options_calculation_path(options_calculation) %>" class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <%= material_icon.edit.md_18 %>
+                                    </span>
+
+                                    <span class="text">Edit</span>
+                                </a>
+                                <br>
+                                <%= button_to options_calculation, class: "btn btn-danger btn-icon-split", method: :delete, data: {"confirm": "Are you sure?"} do %>
+                                    <span class="icon text-white-50">
+                                        <%= material_icon.delete %>
+                                    </span>
+                                    <span class="text">Delete</span>
+                                <% end %>
+                            </span>
+                        </div>
+                    </div>
+        </div>
+    </div>
+
+</div>

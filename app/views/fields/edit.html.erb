@@ -1,0 +1,10 @@
+<h1><%= t('.title') %></h1>
+
+<%= render "form", field: @field %>
+
+<br>
+
+<div>
+  <%= link_to t('shared.show'), @field %> |
+  <%= link_to t('shared.go_back'), fields_path %>
+</div>

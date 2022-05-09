@@ -1,0 +1,134 @@
+<% if @options_calculations.size> 0 %>
+  <style>
+    .container-fluid {
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+    }
+  </style>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">
+        <%= t('.title') %>
+      </h6>
+      <br>
+      <div class="h8 mb-0 text-gray-800">
+        <%= t('.description') %>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+          <div class="row">
+            <div class="col-sm-12">
+              <br>
+              <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"
+                aria-describedby="dataTable_info" style="width: 100%;">
+                <thead>
+                  <tr role="row">
+                    <% @options_calculations[0].employee_data.each do |item| %>
+                      <th style="width: auto;">
+                        <%= item.field.name %>
+                      </th>
+                      <% end %>
+                        <% @column_names_edited.each do |item| %>
+                          <th style="width: auto;">
+                            <%= translate_words(item) %>
+                          </th>
+                          <% end %>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% @options_calculations.each do |calc| %>
+                    <tr>
+                      <% calc.employee_data.each do |item| %>
+                        <td>
+                          <%= item.value %>
+                        </td>
+                        <% end %>
+                          <% @column_names.each do |col_name| %>
+                            <% if calc.send(col_name).respond_to? :name %>
+                              <td>
+                                <%= calc.send(col_name).name %>
+                              </td>
+                              <% else %>
+                                <td>
+                                  <%= calc.send(col_name) %>
+                                </td>
+                                <% end %>
+                                  <% end %>
+                                    <td>
+                                      <a href=<%=edit_options_calculation_path(calc) %>><%= t('shared.edit') %></a>
+                                    </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span style="display:inline-flex; flex-wrap:wrap;gap:0.25rem;">
+    <a href=<%=verify_calculations_options_calculations_path %> class="btn btn-success btn-icon-split">
+      <span class="icon text-white-50">
+        <%= material_icon.checkmark.md_18 %>
+      </span>
+
+      <span class="text">
+        <%= t('.verify') %>
+      </span>
+    </a>
+    <br>
+    <%= link_to remove_all_options_calculations_path, class: "btn btn-danger btn-icon-split" , method: :delete, data:
+      {"confirm": "Are you sure?" } do %>
+      <span class="icon text-white-50">
+        <%= material_icon.delete %>
+      </span>
+      <span class="text">
+        <%= t('.cancel') %>
+      </span>
+      <% end %>
+        <br>
+        <a href=<%=download_certificates_options_calculations_path %> class="btn btn-primary btn-icon-split">
+          <span class="icon text-white-50">
+            <%= material_icon.file_download.md_18 %>
+          </span>
+
+          <span class="text">
+            <%= t('.download') %>
+          </span>
+        </a>
+  </span>
+  <br>
+  <br>
+  <h1 class="h3 mb-0 text-gray-800">
+    <%= t('.noticed') %>
+  </h1>
+  <%= link_to t('.edit_rules'), grant_rules_path %>
+    <br>
+    <%= link_to t('.edit_profiles'), options_profiles_path %>
+      <br>
+      <br>
+
+      <% else %>
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+              <%= t('.title') %>
+            </h6>
+          </div>
+          <div class="card-body" style="padding:1rem;">
+            <p>
+              <%= t('.no_calcs_html') %>
+            </p>
+            <% if @last_calculated_option.present? %>
+              <p>
+                <%= t('.note', last: @last_calculated_option.created_at) %>
+              </p>
+              <% end %>
+          </div>
+        </div>
+        <% end %>

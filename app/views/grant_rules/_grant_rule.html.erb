@@ -1,0 +1,52 @@
+<div class="" id="<%= dom_id grant_rule %>">
+    <div class="card border-left-primary py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<%= dom_id grant_rule %>">
+                    <div class="col mr-2">
+                        <div class="text-xl font-weight-bold text-primary mb-1">
+                          <%= grant_rule.grant_type.name %> </span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div id="collapse_<%= dom_id grant_rule %>" class="accordion-collapse collapse" data-bs-parent="#<%= dom_id grant_rule %>">
+                        <div class="accordion-body">
+                            <div style="padding-right:1rem;">
+                                <%= t('shared.grant_rule.vest_start') %> - <%= grant_rule.vesting_start %>
+                            </div>
+                            <div style="padding-right:1rem;">
+                                <%= t('shared.grant_rule.cliff') %> -  <%= grant_rule.cliff %>
+                            </div>
+                            <div style="padding-right:1rem;">
+                                <%= t('shared.grant_rule.tranches') %> - <%= grant_rule.tranches %>
+                            </div>
+                            <div style="padding-right:1rem;">
+                                <%= t('shared.grant_rule.share_number') %> - <%= grant_rule.share_number %>
+                            </div>
+                            <div style="padding-right:1rem;">
+                                <%= t('shared.grant_rule.trigger_message_html', trigger: translate_trigger(grant_rule.trigger.sub(/^[A-Z]/) {|f| f.downcase })) %>
+                            </div>
+                            <br>
+                            <span style="display:inline-flex; flex-wrap:wrap;gap:0.25rem;">
+                                <a href="<%= edit_grant_rule_path(grant_rule) %>" class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <%= material_icon.edit.md_18 %>
+                                    </span>
+
+                                    <span class="text"><%= t('shared.edit') %></span>
+                                </a>
+                                <br>
+                                <%= button_to grant_rule, class: "btn btn-danger btn-icon-split", method: :delete, data: {"confirm": "Are you sure?"} do %>
+                                    <span class="icon text-white-50">
+                                        <%= material_icon.delete %>
+                                    </span>
+                                    <span class="text"><%= t('shared.delete') %></span>
+                                <% end %>
+                            </span>
+                        </div>
+                    </div>
+        </div>
+    </div>
+
+</div>

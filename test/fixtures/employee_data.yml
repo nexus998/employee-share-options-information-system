@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: E01
+  field: one
+  value: MyString
+
+
+two:
+  employee_id: E01
+  field: two
+  value: MyString
+
+three:
+  employee_id: E01
+  field: three
+  value: 2008-01-01

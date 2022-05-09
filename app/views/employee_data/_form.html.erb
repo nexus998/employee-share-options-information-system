@@ -1,0 +1,38 @@
+<style>
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=100%);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+  }
+</style>
+
+<%= form_tag '/employee_data/import', multipart: true do %>
+  <a class="btn btn-primary btn-icon-split btn-file">
+    <span class="icon text-white-50">
+        <%= material_icon.file_upload.md_18 %>
+    </span>
+
+    <span class="text"><%= t('shared.select_file') %></span>
+    <%= file_field_tag :file %>
+  </a>
+
+  <br>
+  <br>
+  <div>
+    <%= submit_tag t('shared.import'), class: "btn btn-primary btn-user btn-block btn-rounded" %>
+  </div>
+<% end %>

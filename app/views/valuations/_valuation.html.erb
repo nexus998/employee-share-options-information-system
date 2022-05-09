@@ -1,0 +1,50 @@
+<div class="" id="<%= dom_id valuation %>">
+    <div class="card border-left-primary py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<%= dom_id valuation %>">
+                    <div class="col mr-2">
+                        <div class="text-xl text-primary mb-1">
+                          <b><%= valuation.market_price %> € </b><span style="color:gray;"> • <%= valuation.effective_date %> </span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div id="collapse_<%= dom_id valuation %>" class="accordion-collapse collapse" data-bs-parent="#<%= dom_id valuation %>">
+                        <div class="accordion-body">
+                            <div style="padding-right:1rem;">
+                                <%= t('shared.valuation.market_price') %> - <b><%= valuation.market_price %> €</b>
+                            </div>
+                            <div style="padding-right:1rem;">
+                                <%= t('shared.valuation.strike_price') %> - <b><%= valuation.strike_price %> €</b>
+                            </div>
+                            <div style="padding-right:1rem;">
+                                <%= valuation.description %>
+                            </div>
+
+                            <br>
+                            <span style="display:inline-flex; flex-wrap:wrap;gap:0.25rem;">
+                                <a href="<%= edit_valuation_path(valuation) %>" class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <%= material_icon.edit.md_18 %>
+                                    </span>
+
+                                    <span class="text"><%= t('shared.edit') %></span>
+                                </a>
+                                <br>
+                                <%= button_to valuation, class: "btn btn-danger btn-icon-split", method: :delete, data: {"confirm": "Are you sure?"} do %>
+                                    <span class="icon text-white-50">
+                                        <%= material_icon.delete %>
+                                    </span>
+                                    <span class="text"><%= t('shared.delete') %></span>
+                                <% end %>
+                            </span>
+                        </div>
+                    </div>
+        </div>
+    </div>
+
+</div>
+
+
+

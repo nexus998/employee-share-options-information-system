@@ -1,0 +1,33 @@
+<%= form_with(model: grant_type, class: "user") do |form| %>
+  <% if grant_type.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(grant_type.errors.count, "error") %> prohibited this grant_type from being saved:</h2>
+
+      <ul>
+        <% grant_type.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name, class: "form-control form-control-user" %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description, class: "form-control form-control-user" %>
+  </div>
+
+  <div>
+    <%= form.label :cliff_percentage, style: "display: block" %>
+    <%= form.number_field :cliff_percentage, class: "form-control form-control-user" %>
+  </div>
+
+  <br>
+  <div>
+    <%= form.submit class: "btn btn-primary btn-user btn-block btn-rounded"%>
+  </div>
+<% end %>

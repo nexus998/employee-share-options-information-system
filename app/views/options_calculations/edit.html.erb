@@ -1,0 +1,10 @@
+<h1><%=t('.title')%></h1>
+
+<%= render "form", options_calculation: @options_calculation %>
+
+<br>
+
+<div>
+  <%= link_to t('shared.show'), @options_calculation %> |
+  <%= link_to t('shared.go_back'), options_calculations_path %>
+</div>

@@ -1,0 +1,194 @@
+<style>
+    .user_dashboard_value {
+        display:flex;
+
+    }
+    .user_dashboard_value::before {
+        content: '';
+        line-height: 0;
+        height: 0;
+        width:95%;
+        position:absolute;
+        top: 0.8rem;
+        z-index: 1;
+        border-bottom: 2px dotted #dcdcdc;
+        /* background-color: #f8f9fc; */
+    }
+    .user_dashboard_value2 {
+        display:flex;
+
+    }
+    .user_dashboard_value2::before {
+        content: '';
+        line-height: 0;
+        height: 0;
+        width:95%;
+        position:absolute;
+        top: 3.8rem;
+        z-index: 1;
+        border-bottom: 2px dotted #dcdcdc;
+        /* background-color: #f8f9fc; */
+    }
+</style>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"><%= t('shared.welcome_html', name: current_user.name.split(' ')[0]) %></h1>
+</div>
+<hr/>
+<br>
+<div style="display:flex; align-items:center;">
+    <%= pie_chart({t('.vested_options') => @vested_amount.to_i, t('.unvested_options') => @unvested_amount.to_i}, width: "50%", donut: true, colors: ["#1cc88a", "#36b9cc"], legend: "bottom", library: {cutout: 90}) %>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="user_dashboard_value">
+                <span style="width:80%;"> <span style="background-color: #f8f9fc; position: relative; z-index: 2; padding-right: 15px;"><%= t('.vested_value') %> </span></span>
+                 <span style="width:20%; text-align:right;"><span style="background-color: #f8f9fc; position: relative; z-index: 2; padding-left: 15px;"><strong>€<%= @vested_value.to_i %> </strong></span></span>
+        </div>
+            <br>
+        <div class="user_dashboard_value2">
+            <span style="width:80%;"> <span style="background-color: #f8f9fc; position: relative; z-index: 2; padding-right: 15px;"><%= t('.unvested_value') %> </span></span>
+            <span style="width:20%; text-align:right;"><span style="background-color: #f8f9fc; position: relative; z-index: 2; padding-left: 15px;"><strong>€<%= @unvested_value.to_i %> </strong></span></span>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<hr/>
+<br>
+<br>
+<div class="row">
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            <%= t('.emp_id') %></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= current_user.employee_id.present? ? current_user.employee_id : "Not assigned yet" %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><%= t('.num_of_packages') %></div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%= @calculations.size %></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            <%= t('.vested_options') %></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @vested_amount.to_i %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            <%= t('.unvested_options') %></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @unvested_amount.to_i %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            <%= t('.next_vest') %></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @earliest_vest_date %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            <%= t('.vested_value') %></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @vested_value.to_i %> € / <%= @unvested_value.to_i %> €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%
+=begin%>
+ <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Vesting Overview</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="myAreaChart" style="display: block; width: 618px; height: 320px;" width="618" height="320" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Vested/Unvested Options</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="myPieChart" width="618" height="245" style="display: block; width: 618px; height: 245px;" class="chartjs-render-monitor"></canvas>
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-primary"></i> Direct
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-success"></i> Social
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-info"></i> Referral
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+<%
+=end%>
+
+
+</div>

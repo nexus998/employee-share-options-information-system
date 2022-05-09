@@ -1,0 +1,52 @@
+<style>
+.container-fluid {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+</style>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary"><%= t('.title') %></h6>
+    <br>
+    <div class="h8 mb-0 text-gray-800"><%= t('.description') %></div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <div class="row">
+          <div class="col-sm-12">
+          <br>
+            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+                <tr role="row">
+                <% @emp_map[0].each do |item| %>
+                  <th style="width: auto;"><%= item[0] %></th>
+                <% end %>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @emp_map.each do |emp| %>
+                  <tr>
+                    <% emp.each do |item| %>
+                      <td><%= item[1] %></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1 class="h3 mb-0 text-gray-800"><%= t('.noticed') %></h1>
+<br>
+<%= link_to t('.reimport'), new_employee_datum_path + "?force=true" %>
+<br>
+<br>
+
+
+

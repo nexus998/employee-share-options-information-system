@@ -1,0 +1,333 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   "true": "foo"
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+en:
+  notices:
+    imported: "Data imported successfully."
+    create: "Item(s) were successfully created."
+    update: "Item(s) were successfully updated."
+    destroy: "Item(s) were successfully deleted."
+    remove_calcs: "Current calculations were removed."
+
+
+  shared:
+    welcome_html: "Welcome, <strong>%{name}!</strong>"
+    login: "Login"
+    last_updated: "Last updated"
+    go_back: "Go back"
+    delete: "Delete"
+    show: "Show this item"
+    edit: "Edit"
+    select_file: "Select file"
+    import: "Import"
+
+    valuation:
+      market_price: "Market price"
+      strike_price: "Strike price"
+
+    field:
+      field_type_html: "This field is a <strong>%{field_type}</strong>."
+
+    grant_type:
+      cliff_message_html: "After the cliff the employee receives <strong>%{percentage}%</strong> of share options."
+
+    grant_rule:
+      vest_start: "Vesting start"
+      cliff: "Cliff"
+      tranches: "Tranches"
+      share_number: "Share number"
+      trigger_message_html: "This package gets granted <b>%{trigger}.</b>"
+      triggers: "Triggers"
+      trigger_desc: "Choose when this grant type will be granted."
+      trigger_guide_html: "Always -> This grant type is always granted.<br>
+        When employee has no historical data -> When the employee is newly hired therefore does not have any data stored in this system.<br>
+        When employee has historical data -> When options were calculated for this employee previously.<br>
+        When field value has changed -> If the selected field has a different than the last value.<br>
+        Never -> This grant type is never granted."
+      custom_formula: "Custom formula"
+      offset: "Offset (months)"
+      formula_link: "Click here to see the formula reference (opens in new tab)."
+      until_n: "Until the nth anniversary"
+      until_n_guide: "This method calculates the tranches (in months) so that the vesting would end on the nth employment anniversary (after the cliff)."
+    profile:
+      num_shares: "Number of shares"
+      mapped_data: "Mapped data to this profile"
+      map_row: "Map row"
+      field: "Field"
+      value: "Value"
+      empty_html: "There is no options profile mapping to this profile. You can import the mapping <a href=\"/options_profile_mapping/new\">here</a>."
+
+
+  helpers:
+    submit:
+      create: "Create"
+      update: "Update"
+    label:
+      participant:
+        title: "New participant"
+        email: "Email"
+        employee_id: "Employee ID"
+        role: "Role"
+        submit: "babab"
+      valuation:
+        title: "New valuation"
+        market_price: "Market price"
+        strike_price: "Strike price"
+        effective_date: "Effective date"
+        description: "Description"
+      field:
+        name: "Name"
+        field_type: "Field type"
+        description: "Description"
+      grant_type:
+        name: "Name"
+        description: "Description"
+        cliff_percentage: "Cliff percentage"
+      grant_rule:
+        grant_type: "Grant type"
+        vesting_start: "Vesting start date"
+        cliff: "Cliff"
+        tranches: "Tranches"
+        share_number: "Share number"
+        trigger: "Trigger"
+      options_profile:
+        label: "Label"
+        monetary_value: "Monetary value"
+
+
+
+  admin_dashboard:
+    welcome_html: "Welcome, <strong>%{name}!</strong>"
+    calc_options_title: "Amount of options given per grant date"
+    calc_options_description: "This chart shows the amount of options given per grant date."
+    avg: "Average amount of options given to an employee"
+    last_calc: "Last calculation grant date"
+    num_of_ids: "Number of employees in the system"
+    unverified: "Number of unverified calculations"
+    market_price_title: "Market price over time"
+    market_price_description: "This chart shows the how the market price for Your company changes over time."
+    amount_per_type: "Amount of options given per grant type"
+
+  topbar:
+    switch_to_admin: "Switch to Admin"
+    switch_to_participant: "Switch to Participant"
+    logout: "Logout"
+
+
+  sidebar:
+    title: "ESO System"
+    dashboard: "Dashboard"
+    docs: "Docs"
+    setup: "Setup"
+    participants_title: "Participants"
+    valuations_title: "Valuations"
+    report_fields: "Report fields"
+    grant_types_title: "Grant types"
+    grant_rules_title: "Grant rules"
+    profiles: "Share options profiles"
+    profiles_map: "Options profile mapping"
+    granting: "Options Granting"
+    import_emp_data: "Import employee data"
+    calculate_options: "Calculate share options"
+    verify_calcs: "Verify calculations"
+    historical_data: "Historical data"
+    options_ledger: "Options ledger"
+    your_options: "Your options"
+    documents: "Documents"
+
+  formula_reference:
+    index:
+      emp_data_title: "Employee data"
+      field_html: "<b>field(<i>field_name</i>)</b> - returns the value of the field <i>field_name</i> for the current employee."
+      previous_field_html: "<b>previous_field(<i>field_name</i>)</b> - returns the latest value from the employee's historical data of the field <i>field_name</i>."
+      dates_title: "Dates"
+      offset_gd_html: "<b>offset_from_grant_date(<i>number_of_months</i>)</b> - returns the date <i>number_of_months</i> after the grant date."
+      until_html: "<b>until_the_nth_anniversary(<i>hire_date, n</i>)</b> - returns the number of months from the hire date to the <i>n'th</i> employment anniversary."
+      date_obj_html: "<b>date(<i>date_text</i>)</b> - returns a date object for the date <i>date_text</i>. For example: <i>date('2020-01-01')</i> returns January 1, 2020. You can use .day, .month, .year methods on the returned date object."
+      val_title: "Valuations"
+      rel_s_p_html: "<b>relevant_strike_price()</b> - returns the strike price for the valuation that is used for the current calculation."
+      rel_m_p_html: "<b>relevant_market_price()</b> - returns the market price for the valuation that is used for the current calculation."
+      shares_title: "Shares"
+      pr_share_amount_html: "<b>profile_share_amount()</b> - returns the share amount value of the identified options profile for the current employee."
+
+  participants:
+    index:
+      title: "Participants"
+      description: "Here you can specify which email addresses should have access to the participant portal in the system."
+      email: "Email"
+      emp_id: "Employee ID"
+      role: "Role"
+      add: "Add new participant email address"
+      bulk_up: "Bulk upload participant email addresses"
+      bulk_desc_html: "You can choose to bulk upload participant email via a .csv file.<br><br>The file needs to contain:<br>• Email<br>• Employee ID<br>• Role (admin/user)"
+    new:
+      title: "New participant"
+    edit:
+      title: "Editing participant"
+
+
+  valuations:
+    index:
+      title: "Valuations"
+      description: "Valuations are events that determine the share market price and strike price. When calculating options, the relevant valuation will be chosen based on the grant date."
+      add: "Create new valuation"
+    show:
+      val: "Valuation"
+    edit:
+      title: "Editing valuation"
+    new:
+      title: "New valuation"
+
+  fields:
+    index:
+      title: "Employee data fields"
+      description_html: "<p>In order to calculate share options for employees, employee data will be needed. This data will be imported from a .csv file.</p>
+        <p>In order for the calculator to understand what each employee data column/field means, they must be set up in this page.
+        You need to add fields here which can later be used for defining grant rules and calculation formulas.</p>
+        <p>Required columns:<br>
+        <b>• Employee ID</b> - this column will be the employee's identifier. You can use any counting system you like.<br>
+        <b>• Hire date</b> - this column is required if you want to use employment anniversaries as rules for options granting.</p>"
+      add: "Create new field"
+    edit:
+      title: "Editing field"
+    new:
+      title: "New field"
+
+  grant_types:
+    index:
+      title: "Grant types"
+      description_html: "<p>Grant types are types of option packages given to employees. You can set the rules for every grant type in the <a href=\"/grant_rules\">Rules</a> section.</p><p>Please note that you cannot delete grant types which have been granted to employees.</p>"
+      add: "Create new grant type"
+    edit:
+      title: "Editing grant type"
+
+  grant_rules:
+    index:
+      title: "Grant rules"
+      description_html: "<p>Here you can specify how each grant type gets calculated.</p>
+        <p>You can specify when this option package gets granted and how will various data for that package gets calculated.</p>"
+      add: "Create new grant rule"
+    new:
+      title: "New grant rule"
+    edit:
+      title: "Editing grant rule"
+
+  options_profiles:
+    index:
+      title: "Options profiles"
+      description: "Define the profiles which receive a certain amount of share options."
+      add: "Create new options profile"
+    edit:
+      title: "Editing options profile"
+    new:
+      title: "New options profile"
+
+  options_profile_maps:
+    new:
+      title: "Upload options profile mapping"
+      description: "Here you need to import the .csv file containing mapping from employee data to an options profile."
+      missing_title: "Noticed that the mapping is incorrect?"
+      missing_description: "If you noticed that the mapping is incorrect, you can delete the current mapping and import a new one."
+      delete_button: "Delete mapping"
+
+  employee_data:
+    index:
+      title: "Imported Employee Data"
+      description: "Please confirm that the imported data is correct."
+      noticed: "Noticed a mistake?"
+      reimport: "Reimport employee data"
+    new:
+      title: "Upload employee data"
+      description_html: "Here you need to import the .csv file containing employee data. If you are unsure about which columns need to be in the report, please setup the fields <a href=\"/fields\">here</a>."
+
+  options_calculations:
+    index:
+      title: "Calculated options"
+      description: "Please verify that the calculations are correct."
+      verify: "Verify"
+      cancel: "Cancel"
+      download: "Download certificates"
+      noticed: "Noticed a mistake in the rules?"
+      edit_rules: "Edit grant rules"
+      edit_profiles: "Edit share option profiles"
+      no_calcs_html: "There are currently no options calculated for the imported employees. You can calculate them by clicking <a href=\"/options_calculations/new\">here</a>."
+      note: "Note: the last option was calculated at %{last}."
+    edit:
+      title: "Editing options calculation"
+
+    new:
+      title: "Calculating options"
+      description_html: "<p>
+        Here you can start the calculation of options for the imported employees.
+        </p>
+        <p>
+          %{num_of_ids} employees will be selected for this calculation. <a href=\"/employee_data\">Click here to view their data.</a>
+        </p>"
+      description_missing_html: "<p>
+        There is no relevant employee data imported into the database. <a href=\"/employee_data\">Click here to import data.</a>
+        </p>"
+      grant_date: "Grant Date"
+      calculate_button: "Calculate"
+
+    ledger:
+      title: "Options ledger"
+      description: "The options ledger stores all previously calculated options along with the employee data."
+      description_missing_html: "The options ledger is empty. First you need to calculate options by clicking <a href=\"/options_calculations/new\">here</a>."
+
+
+  user_dashboard:
+    index:
+      vested_options: "Vested options"
+      unvested_options: "Unvested options"
+      vested_value: "Vested value"
+      unvested_value: "Unvested value"
+      emp_id: "Your Employee ID"
+      not_assigned: "Not assigned yet"
+      num_of_packages: "Number of your option packages"
+      next_vest: "Next Options Vest"
+    calculated_options:
+      title: "Your calculated options"
+      description: "This page shows all the options that have been calculated for you."
+      no_options: "You currently have no options granted to you."
+    documents:
+      title: "Your documents"
+      description: "Here you can find your Option certificates and other important documents. Clicking on the document link will download them to your computer."
+      file_name_prefix: "Options Certificate"
+
+
+
+
+
+
+
+
+
+#<%=t('') %>

@@ -1,0 +1,2 @@
+class Valuation < ApplicationRecord
+end

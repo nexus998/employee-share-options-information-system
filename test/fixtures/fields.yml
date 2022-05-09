@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  field_type: String
+  description: MyString
+
+two:
+  name: MyString
+  field_type: String
+  description: MyString
+
+three:
+  name: Hire date
+  field_type: Date
+  description: MyString

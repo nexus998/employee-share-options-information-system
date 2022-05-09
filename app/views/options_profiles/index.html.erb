@@ -1,0 +1,25 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"><%= t('.title') %></h6>
+    </div>
+    <div class="card-body" style="padding:1rem;">
+        <p><%= t('.description') %></p>
+    </div>
+</div>
+<div id="options_profiles">
+  <% @options_profiles.each do |options_profile| %>
+    <%= render options_profile %>
+  <% end %>
+</div>
+<br>
+<%= link_to new_options_profile_path do %>
+<a href="<%= new_options_profile_path %>" class="btn btn-primary btn-icon-split">
+  <span class="icon text-white-50">
+      <%= material_icon.add.md_18 %>
+  </span>
+
+  <span class="text"><%= t('.add') %></span>
+</a>
+<% end %>
+<br>
+<br>

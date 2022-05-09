@@ -1,0 +1,10 @@
+<h1><%= t('.title') %></h1>
+
+<%= render "form", options_profile: @options_profile %>
+
+<br>
+
+<div>
+  <%= link_to t('shared.show'), @options_profile %> |
+  <%= link_to t('shared.go_back'), options_profiles_path %>
+</div>

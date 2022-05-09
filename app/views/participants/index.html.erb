@@ -1,0 +1,123 @@
+<% if @participants.size == 0 %>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"><%=t('.title') %></h6>
+    </div>
+    <div class="card-body" style="padding:1rem;">
+        <p><%=t('.description') %></p>
+    </div>
+</div>
+
+<% else %>
+
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary"><%=t('.title') %></h6>
+    <br>
+    <div class="h8 mb-0 text-gray-800"><%=t('.description') %></div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <div class="row">
+          <div class="col-sm-12">
+          <br>
+            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+                <tr role="row">
+                  <td><%=t('.email') %></td>
+                  <td><%=t('.emp_id') %></td>
+                  <td><%=t('.role') %></td>
+                  <td>Edit</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @participants.each do |part| %>
+                  <tr>
+                    <td><%= part.email %></td>
+                    <td><%= part.employee_id %></td>
+                    <td><%= part.role.name %></td>
+                    <td>
+                      <a href=<%= "/participants/" + part.id.to_s + "/edit" %>><%= t('shared.edit') %></a>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<% end %>
+
+
+
+
+<%= link_to new_participant_path do %>
+<a href="<%= new_participant_path %>" class="btn btn-primary btn-icon-split">
+  <span class="icon text-white-50">
+      <%= material_icon.add.md_18 %>
+  </span>
+
+  <span class="text"><%=t('.add') %></span>
+</a>
+<% end %>
+<br>
+<br>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"><%= t('.bulk_up') %></h6>
+    </div>
+    <div class="card-body" style="padding:1rem;">
+        <p><%= t('.bulk_desc_html') %></p>
+    </div>
+</div>
+
+
+<style>
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=100%);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+  }
+</style>
+
+<%= form_tag '/participants/bulk_upload', multipart: true do %>
+  <a class="btn btn-primary btn-icon-split btn-file">
+    <span class="icon text-white-50">
+        <%= material_icon.file_upload.md_18 %>
+    </span>
+
+    <span class="text"><%= t('shared.select_file') %></span>
+    <%= file_field_tag :file %>
+  </a>
+
+  <br>
+  <br>
+  <div>
+    <%= submit_tag t('shared.import'), class: "btn btn-primary btn-user btn-block btn-rounded" %>
+  </div>
+<% end %>

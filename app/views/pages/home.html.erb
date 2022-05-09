@@ -1,0 +1,128 @@
+<% if user_signed_in? %>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"><%=t('admin_dashboard.welcome_html', name: current_user.name.split(' ')[0]) %></h1>
+    </div>
+    <hr/>
+    <br>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"><%=t('admin_dashboard.calc_options_title') %></h6>
+        </div>
+        <div class="card-body" style="padding:1rem;">
+            <p><%=t('admin_dashboard.calc_options_description') %></p>
+            <%= line_chart @calculated_options_grouped %>
+        </div>
+    </div>
+    <br>
+    <hr/>
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                <%= t('admin_dashboard.avg') %></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @average_shares_given.to_i %></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            <%= t('admin_dashboard.last_calc') %></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @last_calc.to_s %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            <%= t('admin_dashboard.num_of_ids') %></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @num_of_ids %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            <%= t('admin_dashboard.unverified') %></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @unverified_calcs %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    </div>
+
+    <hr/>
+    <br>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"><%=t('admin_dashboard.market_price_title') %></h6>
+        </div>
+        <div class="card-body" style="padding:1rem;">
+            <p><%=t('admin_dashboard.market_price_description') %></p>
+            <%= column_chart @market_prices %>
+        </div>
+    </div>
+    <br>
+    <hr/>
+    <br>
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h4 mb-0 text-gray-800"><%=t('admin_dashboard.amount_per_type') %></h1>
+    </div>
+
+    <div class="row">
+    <% if @shares_per_type.size > 0 %>
+    <% @shares_per_type.each do |ty| %>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                <%= ty[0].name %></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= ty[1].to_i %></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <% end %>
+    <% end %>
+
+    </div>
+
+<br>
+<br>
+
+
+<% else %>
+    <%= link_to t('shared.login'), "/users/sign_in" %>
+<% end %>
+

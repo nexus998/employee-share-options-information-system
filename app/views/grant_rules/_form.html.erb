@@ -1,0 +1,230 @@
+<%= form_with(model: grant_rule, class: "user") do |form| %>
+  <% if grant_rule.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(grant_rule.errors.count, "error") %> prohibited this grant_rule from being saved:</h2>
+
+      <ul>
+        <% grant_rule.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :grant_type, style: "display: block" %>
+    <%= form.select :grant_type_id, @grant_type_names,
+    {}, { :class => "btn btn-block btn-rounded",
+          :style => "background-color: white;border-color: #d1d3e2;" } %>
+  </div>
+  <br>
+  <br>
+  <div>
+    <%= form.label :vesting_start, style: "display: block" %>
+    <% vest_date_curr_value = @grant_rule.vesting_start.present? ? @grant_rule.vesting_start.include?('formula') ? 'Custom' : @grant_rule.vesting_start.include?('offset') ? 'Offset from grant date' : 'Static value' : 'Static value'%>
+    <%= select_tag "Vesting start type", options_for_select(['Static value', 'Offset from grant date', 'Custom'], vest_date_curr_value), { :class => "btn btn-block btn-rounded",
+          :style => "background-color: white;border-color: #d1d3e2;", :onchange => "change_vesting_start();" }  %>
+    <div id="grant_rule_vesting_start_static_value">
+      <br>
+      <% if current_page?(controller: 'grant_rules', action: 'new') %>
+        <%= form.date_field :vesting_start, class: "form-control form-control-user" %>
+
+      <% else %>
+        <%= form.text_field :vesting_start, class: "form-control form-control-user", :value => @grant_rule.vesting_start.present? ? @grant_rule.vesting_start.sub('formula - ', '') : '' %>
+      <% end %>
+    </div>
+
+    <div id="grant_rule_vesting_start_offset" style="display: none;">
+      <%= label_tag t('shared.grant_rule.offset') %>
+      <% offset_value = @grant_rule.vesting_start.present? ? @grant_rule.vesting_start[/(\d+)/].to_i : 0 %>
+      <%= number_field_tag 'Vesting start offset value', offset_value, class: "form-control form-control-user"  %>
+    </div>
+    <div id="grant_rule_vesting_start_custom" style="display: none;">
+      <%= label_tag t('shared.grant_rule.custom_formula') %>
+      <!--<%= text_field_tag 'Vesting start formula value', @grant_rule.vesting_start.present? ? @grant_rule.vesting_start.sub('formula - ', '') : '', class: "form-control form-control-user", id: 'grant_rule_vesting_start_custom_field'  %>-->
+      <%= text_field_tag "Vesting start custom value", @grant_rule.vesting_start.present? ? @grant_rule.vesting_start.sub('formula - ', '') : '', id: 'grant_rule_vesting_start_custom_field', class: "form-control form-control-user" %>
+
+      <%= render "formulas", text_field_id: 'grant_rule_vesting_start_custom_field' %>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div>
+    <%= form.label :cliff, style: "display: block" %>
+    <% cliff_curr_value = @grant_rule.cliff.present? ? @grant_rule.cliff.include?('formula') ? 'Custom' : 'Static value' : 'Static value' %>
+    <%= select_tag "Cliff type", options_for_select(['Static value', 'Custom'], cliff_curr_value), { :class => "btn btn-block btn-rounded",
+          :style => "background-color: white;border-color: #d1d3e2;", :onchange => "change_cliff();" }  %>
+
+    <div id="grant_rule_cliff_static_value">
+      <br>
+      <%= form.text_field :cliff, class: "form-control form-control-user" %>
+    </div>
+    <div id="grant_rule_cliff_custom" style="display: none;">
+      <%= label_tag t('shared.grant_rule.custom_formula') %>
+      <!--<%= text_field_tag 'Cliff formula value', nil, class: "form-control form-control-user", id: "grant_rule_cliff_custom_field"  %> -->
+      <%
+=begin%>
+ <%= form.text_field :cliff, id: "grant_rule_cliff_custom_field" , class: "form-control form-control-user", :value => @grant_rule.cliff.present? ? @grant_rule.cliff.sub('formula - ', '') : '' %>
+<%
+=end%>
+      <%= text_field_tag "Cliff custom value", @grant_rule.cliff.present? ? @grant_rule.cliff.sub('formula - ', '') : '', id: "grant_rule_cliff_custom_field" , class: "form-control form-control-user"%>
+      <%= render "formulas", text_field_id: 'grant_rule_cliff_custom_field' %>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div>
+    <%= form.label :tranches, style: "display: block" %>
+    <% tranches_curr_value = @grant_rule.tranches.present? ? @grant_rule.tranches.include?('formula') ? 'Custom' : @grant_rule.tranches.include?('anniversary') ? 'Until the nth anniversary' : 'Static value' : 'Static value'%>
+
+    <%= select_tag "Tranches type", options_for_select(['Static value', 'Until the nth anniversary', 'Custom'], tranches_curr_value), { :class => "btn btn-block btn-rounded",
+          :style => "background-color: white;border-color: #d1d3e2;", :onchange => "change_tranches();" }  %>
+    <div id="grant_type_tranches_static_value">
+      <br>
+      <%= form.text_field :tranches, class: "form-control form-control-user" %>
+    </div>
+    <div id="grant_type_tranches_anniversary" style="display: none;">
+      <%= label_tag t('shared.grant_rule.until_n') %>
+      <%= number_field_tag 'Until the nth anniversary value', 0, class: "form-control form-control-user"  %>
+      <p>
+        <%= t('shared.grant_rule.until_n_guide') %>
+      </p>
+    </div>
+    <div id="grant_type_tranches_custom" style="display: none;">
+      <%= label_tag t('shared.grant_rule.custom_formula') %>
+      <!-- <%= text_field_tag 'Tranches formula value', nil, class: "form-control form-control-user", id: 'grant_type_tranches_custom_field'  %> -->
+      <%
+=begin%>
+ <%= form.text_field :tranches, id: "grant_rule_tranches_custom_field" , class: "form-control form-control-user", :value => @grant_rule.tranches.present? ? @grant_rule.tranches.sub('formula - ', '') : '' %>
+<%
+=end%>
+      <%= text_field_tag "Tranches custom value", @grant_rule.tranches.present? ? @grant_rule.tranches.sub('formula - ', '') : '', id: "grant_rule_tranches_custom_field" , class: "form-control form-control-user" %>
+      <%= render "formulas", text_field_id: 'grant_type_tranches_custom_field' %>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div>
+    <%= form.label :share_number, style: "display: block" %>
+    <% has_formula = @grant_rule.share_number.present? ? @grant_rule.share_number.include?('formula') ? 'Custom' : 'Static value' : 'Static value' %>
+    <%= select_tag "Share number type", options_for_select(['Static value', 'Custom'], has_formula ), { :class => "btn btn-block btn-rounded",
+          :style => "background-color: white;border-color: #d1d3e2;", :onchange => "change_share_number();" }  %>
+    <div id="grant_rule_share_number_static_value">
+      <br>
+      <%= form.number_field :share_number, class: "form-control form-control-user" %>
+    </div>
+    <div id="grant_rule_share_number_custom" style="display: none;">
+      <%= label_tag t('shared.grant_rule.custom_formula') %>
+      <!-- <%= text_field_tag 'Share number formula value', nil, class: "form-control form-control-user", id: 'grant_rule_share_number_custom_field'  %>
+      -->
+      <%
+=begin%>
+ <%= form.text_field :share_number, id: 'grant_rule_share_number_custom_field', class: "form-control form-control-user", :value => @grant_rule.share_number.present? ? @grant_rule.share_number.sub('formula - ', '') : '' %>
+<%
+=end%>
+      <%= text_field_tag "Share number custom value", @grant_rule.share_number.present? ? @grant_rule.share_number.sub('formula - ', '') : '', id: 'grant_rule_share_number_custom_field', class: "form-control form-control-user" %>
+      <%= render "formulas", text_field_id: 'grant_rule_share_number_custom_field' %>
+    </div>
+  </div>
+  <br>
+  <h1> <%= t('shared.grant_rule.triggers') %> </h1>
+  <div>
+    <%= label_tag t('shared.grant_rule.trigger_desc') %>
+    <% curr_value = @grant_rule.trigger.present? ? @grant_rule.trigger.gsub(/ - .+/, '') : 'Always' %>
+    <%= select_tag "Trigger", options_for_select(['Always', 'When employee has no historical data', 'When employee has historical data', 'When field value has changed', 'Never'], curr_value), { :class => "btn btn-block btn-rounded",
+          :style => "background-color: white;border-color: #d1d3e2;", :onchange => "change_trigger();" }  %>
+    <div id="trigger_field_changed" style="display: none;">
+      <br>
+      <%= select_tag "Field", options_for_select(@field_names), { :class => "btn btn-block btn-rounded",
+          :style => "background-color: white;border-color: #d1d3e2;" }  %>
+    </div>
+    <br>
+    <p>
+      <%= t('shared.grant_rule.trigger_guide_html') %>
+    </p>
+    <br>
+  </div>
+  <br>
+  <div>
+    <%= form.submit class: "btn btn-primary btn-user btn-block btn-rounded"%>
+  </div>
+<% end %>
+
+
+
+<script language="javascript">
+
+
+  function change_vesting_start() {
+    var x = document.getElementById("Vesting_start_type").value;
+    if (x == "Custom") {
+      document.getElementById("grant_rule_vesting_start_static_value").style = "display: none;";
+      document.getElementById("grant_rule_vesting_start_offset").style = "display: none;";
+      document.getElementById("grant_rule_vesting_start_custom").style = "display: block;";
+    } else if (x == "Offset from grant date") {
+      document.getElementById("grant_rule_vesting_start_static_value").style = "display: none;";
+      document.getElementById("grant_rule_vesting_start_offset").style = "display: block;";
+      document.getElementById("grant_rule_vesting_start_custom").style = "display: none;";
+    }
+    else {
+      document.getElementById("grant_rule_vesting_start_static_value").style = "display: block;";
+      document.getElementById("grant_rule_vesting_start_offset").style = "display: none;";
+      document.getElementById("grant_rule_vesting_start_custom").style = "display: none;";
+    }
+  }
+
+  function change_cliff() {
+    var x = document.getElementById("Cliff_type").value;
+    if (x == "Custom") {
+      document.getElementById("grant_rule_cliff_static_value").style = "display: none;";
+      document.getElementById("grant_rule_cliff_custom").style = "display: block;";
+    } else {
+      document.getElementById("grant_rule_cliff_static_value").style = "display: block;";
+      document.getElementById("grant_rule_cliff_custom").style = "display: none;";
+    }
+  }
+
+  function change_tranches() {
+    var x = document.getElementById("Tranches_type").value;
+    if (x == "Custom") {
+      document.getElementById("grant_type_tranches_static_value").style = "display: none;";
+      document.getElementById("grant_type_tranches_anniversary").style = "display: none;";
+      document.getElementById("grant_type_tranches_custom").style = "display: block;";
+    } else if (x == "Until the nth anniversary") {
+      document.getElementById("grant_type_tranches_static_value").style = "display: none;";
+      document.getElementById("grant_type_tranches_anniversary").style = "display: block;";
+      document.getElementById("grant_type_tranches_custom").style = "display: none;";
+    }
+    else {
+      document.getElementById("grant_type_tranches_static_value").style = "display: block;";
+      document.getElementById("grant_type_tranches_anniversary").style = "display: none;";
+      document.getElementById("grant_type_tranches_custom").style = "display: none;";
+    }
+  }
+
+  function change_trigger() {
+    var x = document.getElementById("Trigger").value;
+    if (x == "When field value has changed") {
+      document.getElementById("trigger_field_changed").style = "display: block;";
+    } else {
+      document.getElementById("trigger_field_changed").style = "display: none;";
+    }
+  }
+
+  function change_share_number() {
+    var x = document.getElementById("Share_number_type").value;
+    if (x == "Custom") {
+      document.getElementById("grant_rule_share_number_static_value").style = "display: none;";
+      document.getElementById("grant_rule_share_number_custom").style = "display: block;";
+    } else {
+      document.getElementById("grant_rule_share_number_static_value").style = "display: block;";
+      document.getElementById("grant_rule_share_number_custom").style = "display: none;";
+    }
+  }
+
+  change_cliff();
+  change_vesting_start();
+  change_tranches();
+  change_trigger();
+  change_share_number();
+</script>

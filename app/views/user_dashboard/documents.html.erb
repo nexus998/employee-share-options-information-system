@@ -1,0 +1,25 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"><%= t('.title') %></h6>
+    </div>
+    <div class="card-body" style="padding:1rem;">
+        <p><%= t('.description') %></p>
+    </div>
+</div>
+
+<% @options_calculations.each do |calc| %>
+    <div class="card border-left-primary py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <a href="/participant/documents/download?id=<%= calc.id %>" class="no-underline">
+                    <div class="col mr-2">
+                        <span style="display: flex;align-items: center;">
+                            <%= material_icon.file_download.md_24 %>
+                            <b style="padding-left: 10px;"><%= t('.file_name_prefix') %> - <%= calc.grant_date %></b>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+<% end %>

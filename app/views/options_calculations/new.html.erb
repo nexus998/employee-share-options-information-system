@@ -1,0 +1,25 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">
+      <%= t('.title') %>
+    </h6>
+  </div>
+  <div class="card-body" style="padding:1rem;">
+    <% if @num_of_ids> 0 %>
+      <%= t('.description_html', num_of_ids: @num_of_ids) %>
+        <% else %>
+          <%= t('.description_missing_html', num_of_ids: @num_of_ids) %>
+            <% end %>
+  </div>
+</div>
+<% if @num_of_ids> 0 %>
+  <%= form_tag '/options_calculations/calculate' , class: "user" do %>
+
+    <%= label_tag :grant_date, t('.grant_date'), style: "display: block;" %>
+      <%= date_field_tag :grant_date, Date.today, class: "form-control form-control-user" %>
+        <br>
+
+        <%= submit_tag t('.calculate_button'), :class=> "btn btn-primary btn-user btn-block btn-rounded" %>
+
+          <% end %>
+            <% end %>

@@ -1,0 +1,34 @@
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"><%= t('.title') %></h6>
+    </div>
+    <div class="card-body" style="padding:1rem;">
+        <%= t('.description_html') %>
+    </div>
+</div>
+
+<!-- <h1>Grant types</h1>
+<div class="h8 mb-0 text-gray-600">Grant types are types of option packages given to employees. You can set the rules for every grant type in the Rules section.</div>
+<br>
+-->
+<div id="grant_types">
+  <% @grant_types.each do |grant_type| %>
+    <!-- <a href=<%= grant_type_path (grant_type) %> class="no-underline"> -->
+    <%= render grant_type %>
+  <!-- </a> -->
+  <% end %>
+</div>
+
+<br>
+<%= link_to new_grant_type_path do %>
+<a href="<%= new_grant_type_path %>" class="btn btn-primary btn-icon-split">
+  <span class="icon text-white-50">
+      <%= material_icon.add.md_18 %>
+  </span>
+
+  <span class="text"><%= t('.add') %></span>
+</a>
+<% end %>
+<br>
+<br>

@@ -1,0 +1,27 @@
+<%= form_with(model: options_profile, class: "user") do |form| %>
+  <% if options_profile.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(options_profile.errors.count, "error") %> prohibited this options_profile from being saved:</h2>
+
+      <ul>
+        <% options_profile.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :label, style: "display: block" %>
+    <%= form.text_field :label, class: "form-control form-control-user" %>
+  </div>
+
+  <div>
+    <%= form.label :monetary_value, style: "display: block" %>
+    <%= form.number_field :monetary_value, class: "form-control form-control-user" %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit class: "btn btn-primary btn-user btn-block btn-rounded"%>
+  </div>
+<% end %>

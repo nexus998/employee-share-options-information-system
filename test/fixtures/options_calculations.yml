@@ -1,0 +1,55 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: E05152
+  grant_date: 2022-04-20
+  vesting_start_date: 2022-04-20
+  cliff: 1
+  tranches: 1
+  grant_type: one
+  share_number: 9.99
+  verified: false
+
+two:
+  employee_id: MyString
+  grant_date: 2022-04-20
+  vesting_start_date: 2022-04-20
+  vesting_end_date: 2025-04-20
+  cliff: 1
+  tranches: 1
+  grant_type: two
+  share_number: 9.99
+  verified: false
+
+verified1:
+  employee_id: E01
+  grant_date: 2022-04-20
+  vesting_start_date: 2022-04-20
+  vesting_end_date: 2025-04-20
+  cliff: 1
+  tranches: 1
+  grant_type: two
+  share_number: 9.99
+  verified: true
+verified2:
+  employee_id: E01
+  grant_date: 2022-04-20
+  vesting_start_date: 2032-04-20
+  vesting_end_date: 2035-04-20
+  cliff: 1
+  tranches: 1
+  grant_type: two
+  share_number: 9.99
+  verified: true
+
+verified3:
+  employee_id: E01
+  grant_date: 2012-04-20
+  vesting_start_date: 2012-04-20
+  vesting_end_date: 2015-04-20
+  cliff: 1
+  tranches: 1
+  grant_type: two
+  share_number: 9.99
+  verified: true
+

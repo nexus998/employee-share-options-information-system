@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  grant_type: one
+  vesting_start: 2022-04-19
+  cliff: MyString
+  tranches: MyString
+  trigger: When employee has no historical data
+  share_number: 9.99
+
+two:
+  grant_type: two
+  vesting_start: 2022-04-19
+  cliff: formula - 41
+  tranches: MyString
+  trigger: When employee no historical data
+  share_number: 9.99
+
+three:
+  grant_type: two
+  vesting_start: 2022-04-19
+  cliff: MyString
+  tranches: MyString
+  trigger: Never
+  share_number: 9.99
+
+four:
+  grant_type: two
+  vesting_start: offset_from_grant_date(1)
+  cliff: formula - 1
+  tranches: Until the nth anniversary(1)
+  trigger: Always
+  share_number: formula - profile_share_amount()

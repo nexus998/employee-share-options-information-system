@@ -1,0 +1,26 @@
+<a href="<%= docs_formula_reference_path %>" target="_blank">
+    <%= t('shared.grant_rule.formula_link') %>
+</a>
+<div>
+    <button class="btn btn-secondary badge badge-secondary" type="button" onclick=append_formula("<%=text_field_id
+        %>",this)>field(field_name)</button>
+    <button class="btn btn-secondary badge badge-secondary" type="button" onclick=append_formula("<%=text_field_id
+        %>",this)>previous_field(field_name)</button>
+    <button class="btn btn-secondary badge badge-secondary" type="button" onclick=append_formula("<%=text_field_id
+        %>",this)>until_the_nth_anniversary(hire_date, n)</button>
+    <button class="btn btn-secondary badge badge-secondary" type="button" onclick=append_formula("<%=text_field_id
+        %>",this)>relevant_strike_price()</button>
+    <button class="btn btn-secondary badge badge-secondary" type="button" onclick=append_formula("<%=text_field_id
+        %>",this)>relevant_market_price()</button>
+    <button class="btn btn-secondary badge badge-secondary" type="button" onclick=append_formula("<%=text_field_id
+        %>",this)>profile_share_amount()</button>
+
+
+</div>
+
+
+<script>
+    function append_formula(text_field_id, button) {
+        document.getElementById(text_field_id).value += button.innerText;
+    }
+</script>

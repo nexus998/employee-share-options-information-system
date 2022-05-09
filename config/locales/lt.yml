@@ -1,0 +1,330 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   "true": "foo"
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+lt:
+  notices:
+    imported: "Duomenys sėkmingai sukelti."
+    create: "Įrašas(-ai) sėkmingai sukurtas(-i)."
+    update: "Įrašas(-ai) sėkmingai atnaujintas(-i)."
+    destroy: "Įrašas(-ai) sėkmingai ištrintas(-i)."
+    remove_calcs: "Skaičiai sėkmingai pašalinti."
+
+
+  shared:
+    welcome_html: "Sveiki, <strong>%{name}!</strong>"
+    login: "Prisijungti"
+    last_updated: "Paskutinį kartą atnaujinta"
+    go_back: "Grįžti"
+    delete: "Ištrinti"
+    show: "Rodyti šį įrašą"
+    edit: "Redaguoti"
+    select_file: "Pasirinkti failą"
+    import: "Įkelti"
+
+    valuation:
+      market_price: "Rinkos kaina"
+      strike_price: "Opciono kaina"
+
+    field:
+      field_type_html: "Šis įrašas yra <strong>%{field_type}</strong>."
+
+    grant_type:
+      cliff_message_html: "Po cliff darbuotojas gauna <strong>%{percentage}%</strong> priklausančių opcionų."
+
+    grant_rule:
+      vest_start: "Kaupimosi pradžia"
+      cliff: "Cliff"
+      tranches: "Segmentai"
+      share_number: "Opcionų kiekis"
+      trigger_message_html: "Šis paketas išduodamas <b>%{trigger}.</b>"
+      triggers: "Sąlygos"
+      trigger_desc: "Pasirinkite, kokiomis sąlygomis šis paketas išduodamas."
+      trigger_guide_html: "Always -> Šis paketas visada išduodamas darbuotojui.<br>
+        When employee has no historical data -> Kai darbuotojas neseniai įsidarbinęs ir šioje sistemoje apie jį nėra duomenų.<br>
+        When employee has historical data -> Kai šiam darbuotojui buvo prieš tai patvirtinti opcionai.<br>
+        When field value has changed -> Kai pakinta darbuotojų duomenų laukelio reikšmė.<br>
+        Never -> Šis paketas niekada neišduodamas darbuotojui."
+      custom_formula: "Formulė"
+      offset: "Skirtumas (mėnesių)"
+      formula_link: "Spauskite čia, kad atsidarytumėte formulių sąrašą su paaiškinimais (atsidaro naujame lange)."
+      until_n: "Iki n-tųjų darbuotojo metinių"
+      until_n_guide: "Naudojant šį metodą paskaičiuojama kiek likę segmentų iki pasirinktų darbuotojo įsidarbinimo metinių."
+    profile:
+      num_shares: "Opcionų kiekis"
+      mapped_data: "Pritaikyti duomenys šiam profiliui."
+      map_row: "Susieti duomenys"
+      field: "Laukelis"
+      value: "Reikšmė"
+      empty_html: "Nėra pritaikytų duomenų šiam profiliui. Tai galima padaryti paspaudus <a href=\"/options_profile_mapping/new\">čia</a>."
+
+
+  helpers:
+    submit:
+      create: "Sukurti"
+      update: "Atnaujinti"
+    label:
+      participant:
+        title: "Naujas naudotojas"
+        email: "El. paštas"
+        employee_id: "Darbuotojo kodas"
+        role: "Rolė"
+        submit: "Pridėti"
+      valuation:
+        title: "Naujas įvertinimas"
+        market_price: "Rinkos kaina"
+        strike_price: "Opciono kaina"
+        effective_date: "Įsigaliojimo data"
+        description: "Aprašymas"
+      field:
+        name: "Pavadinimas"
+        field_type: "Laukelio tipas"
+        description: "Aprašymas"
+      grant_type:
+        name: "Paketo tipas"
+        description: "Aprašymas"
+        cliff_percentage: "Cliff procentinė reikšmė"
+      grant_rule:
+        grant_type: "Paketo tipas"
+        vesting_start: "Kaupimosi pradžios data"
+        cliff: "Cliff"
+        tranches: "Segmentai"
+        share_number: "Opcionų kiekis"
+        trigger: "Sąlyga"
+      options_profile:
+        label: "Žymė"
+        monetary_value: "Opcionų kiekis"
+
+
+
+  admin_dashboard:
+    welcome_html: "Sveiki, <strong>%{name}!</strong>"
+    calc_options_title: "Opcionų kiekiai išduoti per kiekvieną skaičiavimą"
+    calc_options_description: "Ši diagrama pavaizduoja kiek opcionų buvo išduota per kiekvieną opcionų skaičiavimą."
+    avg: "Vidutinis opcionų kiekis vienam darbuotojui"
+    last_calc: "Paskutinio skaičiavimo data"
+    num_of_ids: "Darbuotojų skaičius sistemoje"
+    unverified: "Nepatvirtintų skaičiavimų skaičius"
+    market_price_title: "Akcijų rinkos kainų kaita"
+    market_price_description: "Ši diagrama pavaizduoja kaip keitėsi įmonės akcijų rinkos kainos."
+    amount_per_type: "Opcionų kiekis pagal paketo tipą"
+
+  topbar:
+    switch_to_admin: "Prisijungti kaip administratorius"
+    switch_to_participant: "Prisijungti kaip darbuotojas"
+    logout: "Atsijungti"
+
+
+  sidebar:
+    title: "Opcionų sistema"
+    dashboard: "Pagrindinis"
+    docs: "Dokumentacija"
+    setup: "Paruošimas"
+    participants_title: "Naudotojai"
+    valuations_title: "Vertinimai"
+    report_fields: "Duomenų laukeliai"
+    grant_types_title: "Paketų tipai"
+    grant_rules_title: "Paketų taisyklės"
+    profiles: "Opcionų profiliai"
+    profiles_map: "Opcionų profilių sąsaja"
+    granting: "Paketų išdavimas"
+    import_emp_data: "Įkelti darbuotojų duomenis"
+    calculate_options: "Apskaičiuoti opcionus"
+    verify_calcs: "Patvirtinti skaičiavimus"
+    historical_data: "Istoriniai duomenys"
+    options_ledger: "Opcionų knyga"
+    your_options: "Jūsų opcionai"
+    documents: "Dokumentai"
+
+  formula_reference:
+    index:
+      emp_data_title: "Darbuotojų duomenys"
+      field_html: "<b>field(<i>field_name</i>)</b> - grąžina laukelio <i>field_name</i> reikšmę aktualiam darbuotojui."
+      previous_field_html: "<b>previous_field(<i>field_name</i>)</b> - grąžina laukelio <i>field_name</i> reikšmė aktualiam darbuotojui (kokia ji buvo prieš šį skaičiavimą)."
+      dates_title: "Datos"
+      offset_gd_html: "<b>offset_from_grant_date(<i>number_of_months</i>)</b> - Grąžina datą <i>number_of_months</i> mėnesių po opcionų išdavimo datos."
+      until_html: "<b>until_the_nth_anniversary(<i>hire_date, n</i>)</b> - Grąžina mėnesių kiekį, kiek darbuotojui liko iki <i>n</i>-tųjų darbuotojo metinių. Reikia pateikti ir darbuotojo įsidarbinimo datą naudojant <i>field()</i> formulę."
+      date_obj_html: "<b>date(<i>date_text</i>)</b> - Grąžina datos objektą su data <i>date_text</i>. Pavyzdžiui: <i>date('2020-01-01')</i> grąžina January 1, 2020. Taip pat galima naudoti .day, .month, .year funkcijas ant gautos datos."
+      val_title: "Vertinimai"
+      rel_s_p_html: "<b>relevant_strike_price()</b> - Grąžina vieno opciono panaudojimo kainą, kuri aktuali dabartiniame skaičiavime."
+      rel_m_p_html: "<b>relevant_market_price()</b> - Grąžina akcijos rinkos kainą, kuri aktuali dabartiniame skaičiavime."
+      shares_title: "Opcionai"
+      pr_share_amount_html: "<b>profile_share_amount()</b> - Grąžina opcionų kiekį, kuris priklauso aktualiam darbuotojui šiame skaičiavime."
+
+  participants:
+    index:
+      title: "Naudotojai"
+      description: "Čia galite pasirinkti, kurie darbuotojai galės naudotis sistema. Reikia nurodyti jų el. paštą, darbuotojo kodą ir rolę."
+      email: "El. paštas"
+      emp_id: "Darbuotojo kodas"
+      role: "Rolė"
+      add: "Pridėti naują darbuotoją"
+      bulk_up: "Sukelti naudotojus su Excel failu"
+      bulk_desc_html: "Galite pasirinkti sukelti daug darbuotojų su .csv failu.<br><br>Faile turi būti tokie stulpeliai:<br>• Email<br>• Employee ID<br>• Role (admin/user)"
+    new:
+      title: "Naujas naudotojas"
+    edit:
+      title: "Redaguojamas naudotojas"
+
+
+  valuations:
+    index:
+      title: "Vertinimai"
+      description: "Vertinimas yra toks procesas, kurio metu nustatoma įmonės akcijų rinkos vertė bei pasirenkama opcionų įsigijimo kaina."
+      add: "Sukurti naują įvertinimą"
+    show:
+      val: "Įvertinimas"
+    edit:
+      title: "Redaguojamas įvertinimas"
+    new:
+      title: "Naujas įvertinimas"
+
+  fields:
+    index:
+      title: "Darbuotojų duomenys"
+      description_html: "<p>Norint apskaičiuoti opcionus, reikalingi darbuotojų duomenys. Šiuos duomenis reikia įkelti .csv formatu.</p>
+        .csv faile galite pridėti kokius norit stulpelius, kurių reikšmės poto gali būti naudojamos skaičiuojant opcionus su formulėmis.</p>
+        <p>Reikalingi stulpeliai:<br>
+        <b>• Employee ID</b> - šis stulpelis nurodo darbuotojo kodą. Jis yra privalomas, tačiau galite naudoti bet kokią skaičiavimo sistemą.<br>
+        <b>• Hire date</b> - Jeigu skaičiuojant reikalinga nustatyti darbuotojo metines, šis stulpelis yra būtinas.</p>"
+      add: "Sukurti naują laukelį"
+    edit:
+      title: "Redaguojamas laukelis"
+    new:
+      title: "Naujas laukelis"
+
+  grant_types:
+    index:
+      title: "Paketų tipai"
+      description_html: "<p>Šiame puslapyje nusakomi, kokie opcionų paketai gali būti išduodami darbuotojui. Sukurtiems paketams taisykles galite nustatyti <a href=\"/grant_rules\">Taisyklių</a> puslapyje.</p><p>Įsidemėkite, jog negalima ištrinti paketų tipų, kurie jau anksčiau buvo išduoti darbuotojams.</p>"
+      add: "Sukurti naują paketo tipą"
+    edit:
+      title: "Redaguojamas paketo tipas"
+
+  grant_rules:
+    index:
+      title: "Paketų taisyklės"
+      description_html: "<p>Šiame puslapyje galite nustatyti, kaip paskaičiuojamas kiekvienas opcionų paketas.</p>
+        <p>Nustatomos sąlygos, kada išduodamas paketas bei kaip skaičiuojasi kiekviena to paketo dalis.</p>"
+      add: "Sukurti naują taisyklę"
+    new:
+      title: "Kuriama nauja taisyklė"
+    edit:
+      title: "Redaguojama taisyklė"
+
+  options_profiles:
+    index:
+      title: "Opcionų profiliai"
+      description: "Norint nustatyti, kiek opcionų priklauso kokiam darbuotojui, reikia sukurti opcionų profilius. Šie profiliai yra susieti su tam tikrais darbuotojų duomenimis, pagal kuriuos bus atskirta, kiek opcionų darbuotojui priklauso."
+      add: "Sukurti naują profilį"
+    edit:
+      title: "Redaguojamas profilis"
+    new:
+      title: "Kuriamas naujas profilis"
+
+  options_profile_maps:
+    new:
+      title: "Įkelti opcionų profilių sąsajas su duomenimis"
+      description: "Čia reikia įkelti .csv failą, kuriame nustatoma, kokie darbuotojų duomenys priklauso kokiam opcionų profiliui."
+      missing_title: "Pastebėjote klaidą?"
+      missing_description: "Jeigu pastebėjote, kad sąsajos yra neteisingos, galite visas sąsajas ištrinti ir sukelti naujas."
+      delete_button: "Ištrinti sąsajas"
+
+  employee_data:
+    index:
+      title: "Sukelti darbuotojų duomenys"
+      description: "Prašome įsitikinte, kad sukelti duomenys apie darbuotojus yra teisingi."
+      noticed: "Pastebejote klaidą?"
+      reimport: "Įkelti duomenis iš naujo"
+    new:
+      title: "Įkelti darbuotojų duomenis"
+      description_html: "Šiame puslapyje turite sukelti darbuotojų duomenys iš .csv failo. Jei neaišku, kokie duomenys turi/gali būti faile, prašau pasižiūrėkite <a href=\"/fields\">šį puslapį</a>."
+
+  options_calculations:
+    index:
+      title: "Apskaičiuoti opcionai"
+      description: "Įsitikinkite, kad apskaičiuoti opcionai yra teisingi."
+      verify: "Patvirtinti"
+      cancel: "Atšaukti"
+      download: "Atsisiųsti sertifikatus"
+      noticed: "Pastebejote klaidą?"
+      edit_rules: "Redaguoti taisykles"
+      edit_profiles: "Redaguoti opcionų profilius"
+      no_calcs_html: "Šiuo metu nėra apskaičiuotų opcionų sukeltiems darbuotojams. Tai galite padaryti <a href=\"/options_calculations/new\">čia</a>."
+      note: "Dėmesio: paskutinis opcionas buvo apskaičiuotas %{last}."
+
+    new:
+      title: "Opcionų skaičiavimas"
+      description_html: "<p>
+        Šiame puslapyje galite inicijuoti opcionų skaičiavimus. Tereikia pasirinkti opcionų išdavimo datą bei paspausti Apskaičiuoti.
+        </p>
+        <p>
+          %{num_of_ids} darbuotojai yra parinkti šiam skaičiavimui. <a href=\"/employee_data\">Čia galite patikrinti jų duomenis</a>.
+        </p>"
+      description_missing_html: "<p>
+        Šiuo metu sistemoje nėra sukelti darbuotojų duomenų. <a href=\"/employee_data\">Paspauskite čia, kad tai padarytumėt.</a>
+        </p>"
+      grant_date: "Opcionų išdavimo data"
+      calculate_button: "Apskaičiuoti"
+
+    ledger:
+      title: "Opcionų knyga"
+      description: "Opcionų knyga laiko visus prieš tai vykusius opcionų skaičivimus."
+      description_missing_html: "Opcionų knyga yra tuščia. Pirmiausia reiktų apskačiuoti opcionus paspaudus <a href=\"/options_calculations/new\">čia</a>."
+
+
+  user_dashboard:
+    index:
+      vested_options: "Susikaupę opcionai"
+      unvested_options: "Dar nesusikaupę opcionai"
+      vested_value: "Sukaupta piniginė vertė"
+      unvested_value: "Dar nesukaupta piniginė vertė"
+      emp_id: "Jūsų darbuotojo kodas"
+      not_assigned: "Dar nepaskirtas"
+      num_of_packages: "Jūsų paketų skaičius"
+      next_vest: "Artimiausia opcionų susikaupimo data"
+    calculated_options:
+      title: "Jūsų apskaičiuoti opcionai"
+      description: "Šis puslapis rodo visus Jūsų paketus, kurie Jums buvo apskaičiuoti."
+      no_options: "Šiuo metu Jums nėra apskaičiuotas nė vienas paketas."
+    documents:
+      title: "Jūsų dokumentai"
+      description: "Čia galite rasti Jūsų opcionų sertifikatus. Paspaudus ant įrašo opcionas bus atsiųstas į Jūsų kompiuterį."
+      file_name_prefix: "Opcionų sertifikatas"
+
+
+
+
+
+
+
+
+
+#<%=t('') %>

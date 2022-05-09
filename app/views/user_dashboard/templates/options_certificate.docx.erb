@@ -1,0 +1,47 @@
+<h1>
+(COMPANY NAME)
+</h1>
+<h1>
+OPTION CERTIFICATE
+</h1>
+<p>This is to certify that <strong><%= current_user.name %></strong> (the <strong>"Optionholder"</strong>) is the holder of an option to acquire <strong><%= @selected_calc.share_number.to_i %></strong>
+ordinary shares of EUR 0.00001 in COMPANY NAME at an option price of <strong>€<%= @last_valuation.strike_price %></strong> per share.
+The Date of Grant of the Option is <strong><%= @selected_calc.grant_date %></strong>.
+</p>
+<br>
+<h2><i>Exercise</i></h2>
+<p>The Option may only be exercise in accordance with rule x.x of the Plan and to the extent vested in accordance with rule x.y of the Plan.
+The Board has agreed that the Option shall vest, provided that the Optionholder is employed withint the Group on the relevant Vesting Date
+and subject to rule x of the Plan, in respect of <%= @selected_calc.grant_type.cliff_percentage %>% of the Option Shares on
+<strong><%= @selected_calc.grant_date + @selected_calc.cliff.months %></strong> and the balance of the Option Shares shall vest monthly
+thereafter in <strong><%= @selected_calc.tranches %></strong> equal tranches, such monthly vesting to commence on <strong><%= @selected_calc.grant_date + @selected_calc.cliff.months + 1.months%></strong>.
+</p>
+<br>
+<p>The Option will expire at 5.00 p.m. on the business day immediately preceding the tenth anniversary of th Date of Grant of the Option.
+</p>
+
+<br>
+<h2><i>Tax</i></h2>
+<p>Depending on the circumstances, the Optionholder may become liable to Tax on the grant of the Option, the exercise of the Option,
+the acquisition of Shares on exercise of the Option and/or the disposal of Shares acquired by the Optionholder on exercise of the Option.
+If any Group Company is required to account to any tax authority in any jurisdiction for any Tax arising on the grant of the Option,
+the exercise of the Option, the acquisition of Shares on exercise of the Option and/or the disposal of Shares acquired by the
+Optionholder on exercise of the Option, the Optionholder will be required, in accordance with rules x.x and x.x of the Plan,
+to enter into such arrangements with such Group Company (or any other person nominated by the Company) as may be necessary to ensure
+that such Group Company is put in sufficient funds to enable it to discharge its liability to the appropriate authority,
+or is reimbursed for any payment made to the appropriate authority.
+</p>
+<br>
+<br>
+
+<table>
+<tbody>
+<tr>
+<td class="right">
+Director
+</td>
+<td class="ms-border-bottom-single">
+</td>
+</tr>
+</tbody>
+</table>

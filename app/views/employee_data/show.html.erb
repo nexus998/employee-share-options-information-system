@@ -1,0 +1,10 @@
+
+
+<%= render @employee_datum %>
+
+<div>
+  <%= link_to "Edit this employee datum", edit_employee_datum_path(@employee_datum) %> |
+  <%= link_to "Back to employee data", employee_data_path %>
+
+  <%= button_to "Destroy this employee datum", @employee_datum, method: :delete %>
+</div>
