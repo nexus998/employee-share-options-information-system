@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ši sistema yra skirta bakalauro baigiamojo darbo atsiskaitymui.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Sistemos pagrindinis funkcionalumas:
+* Darbuotojų opcionų skaičiavimas pagal lanksčias taisykles
+* Darbuotojų opcionų sertifikatų generavimas
+* Asmeninių opcionų peržiūros portalas
