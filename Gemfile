@@ -10,8 +10,8 @@ gem "rails", "~> 7.0.0"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-# gem "sqlite3", "~> 1.4"
-gem "mysql2"
+gem "sqlite3", "~> 1.4"
+#gem "mysql2"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -62,10 +62,12 @@ gem "chartkick"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
-#gem "bootsnap", require: false
+gem "bootsnap", require: false
 
 # Use Sass to process CSS
 gem "sassc-rails"
+
+
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
@@ -83,6 +85,7 @@ group :development do
   gem 'solargraph'
   gem 'rubocop'
   gem 'rubycritic', require: false
+  gem 'ruby-prof'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 

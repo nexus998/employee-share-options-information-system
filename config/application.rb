@@ -11,6 +11,8 @@ module EmployeeShareOptions
     # Use the responders controller from the responders gem
     config.app_generators.scaffold_controller :responders_controller
 
+    config.middleware.use Rack::RubyProf, :path => './tmp/profile'
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 

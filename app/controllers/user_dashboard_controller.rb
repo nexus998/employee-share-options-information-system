@@ -57,7 +57,7 @@ class UserDashboardController < ApplicationController
       @unvested_amount = share_numbers.inject(:+) - @vested_amount
       @earliest_vest_date = dates.min
       @vested_value = vested_values.inject(:+)
-      @unvested_value = all_values.inject(:+)
+      @unvested_value = all_values.inject(:+) - @vested_value
     end
 
   end

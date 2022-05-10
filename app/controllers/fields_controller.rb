@@ -32,10 +32,8 @@ class FieldsController < ApplicationController
     respond_to do |format|
       if @field.save
         format.html { redirect_to field_url(@field), notice: t('notices.create') }
-        format.json { render :show, status: :created, location: @field }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @field.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,10 +43,8 @@ class FieldsController < ApplicationController
     respond_to do |format|
       if @field.update(field_params)
         format.html { redirect_to field_url(@field), notice: t('notices.update') }
-        format.json { render :show, status: :ok, location: @field }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @field.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,7 +55,6 @@ class FieldsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to fields_url, notice: t('notices.destroy') }
-      format.json { head :no_content }
     end
   end
 

@@ -32,14 +32,14 @@
                                         <%= material_icon.edit.md_18 %>
                                     </span>
 
-                                    <span class="text">Edit</span>
+                                    <span class="text"><%= t('shared.edit') %></span>
                                 </a>
                                 <br>
                                 <%= button_to participant, class: "btn btn-danger btn-icon-split", method: :delete, data: {"confirm": "Are you sure?"} do %>
                                     <span class="icon text-white-50">
                                         <%= material_icon.delete %>
                                     </span>
-                                    <span class="text">Delete</span>
+                                    <span class="text"><%= t('shared.delete') %></span>
                                 <% end %>
                             </span>
                         </div>

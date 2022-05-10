@@ -47,10 +47,8 @@ class EmployeeDataController < ApplicationController
         format.html do
           redirect_to employee_datum_url(@employee_datum), notice: 'Employee datum was successfully created.'
         end
-        format.json { render :show, status: :created, location: @employee_datum }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @employee_datum.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -62,10 +60,8 @@ class EmployeeDataController < ApplicationController
         format.html do
           redirect_to employee_datum_url(@employee_datum), notice: 'Employee datum was successfully updated.'
         end
-        format.json { render :show, status: :ok, location: @employee_datum }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @employee_datum.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -76,7 +72,6 @@ class EmployeeDataController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to employee_data_url, notice: 'Employee datum was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

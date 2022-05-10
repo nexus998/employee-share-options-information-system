@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-   :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
+   :validatable, :timeoutable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   def self.assign_role(user)
     relevant_role = Participant.where(email: user.email).first

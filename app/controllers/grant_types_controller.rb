@@ -29,10 +29,8 @@ class GrantTypesController < ApplicationController
     respond_to do |format|
       if @grant_type.save
         format.html { redirect_to grant_type_url(@grant_type), notice: t('notices.create') }
-        format.json { render :show, status: :created, location: @grant_type }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @grant_type.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,10 +40,8 @@ class GrantTypesController < ApplicationController
     respond_to do |format|
       if @grant_type.update(grant_type_params)
         format.html { redirect_to grant_type_url(@grant_type), notice: t('notices.update') }
-        format.json { render :show, status: :ok, location: @grant_type }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @grant_type.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +52,6 @@ class GrantTypesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to grant_types_url, notice: t('notices.destroy') }
-      format.json { head :no_content }
     end
   end
 

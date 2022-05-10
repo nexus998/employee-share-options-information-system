@@ -5,17 +5,17 @@
 #   gem "sqlite3"
 #
 default: &default
-  adapter: mysql2
+  adapter: sqlite3
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: mysql2://bc9b945ec169cd:5f88c916@eu-cdbr-west-02.cleardb.net/heroku_8ef8ef2f6efb7c4?reconnect=true
-  username: bc9b945ec169cd
-  password: 5f88c916
-
+  #database: mysql2://bc9b945ec169cd:5f88c916@eu-cdbr-west-02.cleardb.net/heroku_8ef8ef2f6efb7c4?reconnect=true
+  #username: bc9b945ec169cd
+  #password: 5f88c916
+  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -26,6 +26,7 @@ test:
 
 production:
   <<: *default
-  database: mysql2://bc9b945ec169cd:5f88c916@eu-cdbr-west-02.cleardb.net/heroku_8ef8ef2f6efb7c4?reconnect=true
-  username: bc9b945ec169cd
-  password: 5f88c916
+  database: db/production.sqlite3
+  #database: mysql2://bc9b945ec169cd:5f88c916@eu-cdbr-west-02.cleardb.net/heroku_8ef8ef2f6efb7c4?reconnect=true
+  #username: bc9b945ec169cd
+  #password: 5f88c916

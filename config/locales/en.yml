@@ -36,6 +36,7 @@ en:
     update: "Item(s) were successfully updated."
     destroy: "Item(s) were successfully deleted."
     remove_calcs: "Current calculations were removed."
+    verified_calcs: "%{amount} options packages were verified."
 
 
   shared:
@@ -48,6 +49,7 @@ en:
     edit: "Edit"
     select_file: "Select file"
     import: "Import"
+    options_calculated: "Options calculated successfully."
 
     valuation:
       market_price: "Market price"
@@ -80,6 +82,7 @@ en:
     profile:
       num_shares: "Number of shares"
       mapped_data: "Mapped data to this profile"
+      mapping: "Mapping "
       map_row: "Map row"
       field: "Field"
       value: "Value"
@@ -121,6 +124,14 @@ en:
       options_profile:
         label: "Label"
         monetary_value: "Monetary value"
+      options_calculation:
+        grant_date: "Grant date"
+        grant_type: "Grant type"
+        vesting_start: "Vesting start date"
+        cliff: "Cliff"
+        tranches: "Tranches"
+        share_number: "Share number"
+        trigger: "Trigger"
 
 
 

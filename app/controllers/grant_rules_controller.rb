@@ -72,10 +72,8 @@ class GrantRulesController < ApplicationController
     respond_to do |format|
       if @grant_rule.save
         format.html { redirect_to grant_rule_url(@grant_rule), notice: t('notices.create') }
-        format.json { render :show, status: :created, location: @grant_rule }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @grant_rule.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -91,10 +89,8 @@ class GrantRulesController < ApplicationController
 
       if @grant_rule.update(attributes)
         format.html { redirect_to grant_rule_url(@grant_rule), notice: t('notices.update') }
-        format.json { render :show, status: :ok, location: @grant_rule }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @grant_rule.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -105,7 +101,6 @@ class GrantRulesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to grant_rules_url, notice: t('notices.destroy') }
-      format.json { head :no_content }
     end
   end
 

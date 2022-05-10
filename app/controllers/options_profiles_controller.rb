@@ -29,10 +29,8 @@ class OptionsProfilesController < ApplicationController
     respond_to do |format|
       if @options_profile.save
         format.html { redirect_to options_profile_url(@options_profile), notice: t('notices.create') }
-        format.json { render :show, status: :created, location: @options_profile }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @options_profile.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,10 +40,8 @@ class OptionsProfilesController < ApplicationController
     respond_to do |format|
       if @options_profile.update(options_profile_params)
         format.html { redirect_to options_profile_url(@options_profile), notice: t('notices.update') }
-        format.json { render :show, status: :ok, location: @options_profile }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @options_profile.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +52,6 @@ class OptionsProfilesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to options_profiles_url, notice: t('notices.destroy') }
-      format.json { head :no_content }
     end
   end
 

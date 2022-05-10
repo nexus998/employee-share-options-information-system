@@ -64,16 +64,26 @@ class OptionsCalculationsController < ApplicationController
     return (nth_anniversary.year*12 + nth_anniversary.month) - (grant_date.to_date.year*12 + grant_date.to_date.month) - cliff.to_i
   end
 
-  def get_field(field_name, employee_id)
-    field = Field.find_by(name: field_name)
-    # value = EmployeeDatum.find_by(employee_id: employee_id, field_id: field.id).value
-    value = EmployeeDatum.left_joins(:options_calculations).where(employee_id: employee_id, field_id: field.id).where(options_calculations: nil).last.value
-    if field.field_type == 'Date'
-      return value.to_date
-    elsif field.field_type == 'Number'
-      return value.to_i
-    else
-      return value.to_s
+  def get_field(field_name, employee_id, employee_data)
+    begin
+      field = Field.find_by(name: field_name)
+      # value = EmployeeDatum.find_by(employee_id: employee_id, field_id: field.id).value
+      # value = EmployeeDatum.left_joins(:options_calculations).where(employee_id: employee_id, field_id: field.id).where(options_calculations: nil).last
+      value = employee_data.where(employee_id: employee_id, field_id: field.id).last.value
+      # if !value.present?
+      #   value = EmployeeDatum.left_joins(:options_calculations).where(employee_id: employee_id, field_id: field.id).where(options_calculations.verified: false).last
+      # end
+      if field.field_type == 'Date'
+        return value.to_date
+      elsif field.field_type == 'Number'
+        return value.to_i
+      else
+        return value.to_s
+      end
+    rescue Exception => e
+      puts 'Error raised while trying to get current value.'
+      puts 'error is:', e
+      return 0
     end
   end
 
@@ -101,9 +111,10 @@ class OptionsCalculationsController < ApplicationController
     return 0
   end
 
-  def get_previous_field(field_name, employee_id)
+  def get_previous_field(field_name, employee_id, historical_data)
      field = Field.find_by(name: field_name)
-     value = EmployeeDatum.left_joins(:options_calculations).where(employee_id: employee_id, field_id: field.id).where.not(options_calculations: nil).last
+    #  value = EmployeeDatum.left_joins(:options_calculations).where(employee_id: employee_id, field_id: field.id).where.not(options_calculations: nil).last
+     value = historical_data.where(employee_id: employee_id, field_id: field.id).last
      if value.present?
         return value.value
      else
@@ -111,14 +122,14 @@ class OptionsCalculationsController < ApplicationController
      end
   end
 
-  def evaluate_custom_formula(formula, employee_id, hire_date, grant_date, cliff)
+  def evaluate_custom_formula(formula, employee_id, hire_date, grant_date, cliff, emp_data, historical_emp_data)
     calculator = Keisan::Calculator.new
     calculator.evaluate(formula,
     'offset_from_grant_date': Proc.new { |offset_value| offset_from_grant_date(offset_value, params[:grant_date]) },
-    'field': Proc.new { |field_name| get_field(field_name, employee_id) },
+    'field': Proc.new { |field_name| get_field(field_name, employee_id, emp_data) },
     'profile_share_amount': Proc.new { profile_share_amount(employee_id) },
     'until_the_nth_anniversary': Proc.new { |n, grant_date, hire_date, cliff| until_the_nth_anniversary(n, grant_date, hire_date, cliff) },\
-    'previous_field': Proc.new { |field_name| get_previous_field(field_name, employee_id) },
+    'previous_field': Proc.new { |field_name| get_previous_field(field_name, employee_id, historical_emp_data) },
     'relevant_strike_price': Proc.new { relevant_strike_price() },
     'relevant_market_price': Proc.new { relevant_market_price() },
   )
@@ -140,8 +151,9 @@ class OptionsCalculationsController < ApplicationController
   def verify_calculations
     # set verified to true
     relevant_calcs = OptionsCalculation.where(verified: false)
+    am = OptionsCalculation.where(verified: false).size
     relevant_calcs.update_all(verified: true)
-    redirect_to ledger_options_calculations_path
+    redirect_to ledger_options_calculations_path, notice: t('notices.verified_calcs', amount: am)
     # create historical calculations
 
   end
@@ -162,21 +174,26 @@ class OptionsCalculationsController < ApplicationController
           #temp_docx = Tempfile.new(['OC', '.docx'], encoding: 'ascii-8bit')
           temp_docx = Tempfile.create(['OC', '.docx'], encoding: 'ascii-8bit')
           puts temp_docx.path
-          cert_file = Htmltoword::Document.create(template_string, (calc.employee_id.to_s + ' - OC - ' + calc.grant_date.to_s))
+          cert_file = Htmltoword::Document.create(template_string, (calc.employee_id.to_s + ' - ' + calc.id.to_s + ' - ' + calc.grant_date.to_s))
 
           temp_docx.write(cert_file)
 
           puts temp_docx.read
-          zipfile.add(calc.employee_id.to_s + ' - OC - ' + calc.grant_date.to_s + '.docx', temp_docx.path)
+          zipfile.add(calc.employee_id.to_s + ' - ' + calc.id.to_s + ' - ' + calc.grant_date.to_s + '.docx', temp_docx.path)
 
           temp_docx.close
         end
+        #puts 'REDIRECT TO OPTIONS CALCULATIONS', options_calculations_path
+        #redirect_to options_calculations_path
       end
       zip_data = File.read(temp_file.path)
       send_data(zip_data, type: 'application/zip', disposition: 'attachment', filename: zip_name)
+    rescue Exception => e
+      puts e
     ensure
       temp_file.close
       temp_file.unlink
+
     end
   end
 
@@ -185,19 +202,18 @@ class OptionsCalculationsController < ApplicationController
     # 1. Get employee data
     #@employee_data = EmployeeDatum.all.filter { |e| !e.options_calculations.present? }
     @employee_data = EmployeeDatum.left_joins(:options_calculations).where(options_calculations: nil)
-    puts @employee_data.size
     @emp_ids = @employee_data.map { |e| e.employee_id }.uniq
-    puts @emp_ids.size
     grant_rules = GrantRule.all
     @emp_ids.each do |e|
-      puts e
+      employee_data = EmployeeDatum.left_joins(:options_calculations).where(employee_id: e).where(options_calculations: nil)
+      historical_data = EmployeeDatum.left_joins(:options_calculations).where(employee_id: e).where.not(options_calculations: nil)
+      hire_date = get_field('Hire date', e, employee_data)
       # for each employee ID in the employee data we need to create a calculation
       # to do that we firstly need to determine which grant types this employee needs.
       types_to_calculate = Array.new
+      has_historical_data = historical_data.size > 0
       grant_rules.each do |r|
         # check if trigger of each rule matches criteria
-        has_historical_data = EmployeeDatum.left_joins(:options_calculations).where(employee_id: e).where.not(options_calculations: nil).size > 0
-
         if r.trigger == 'When employee has no historical data'
           types_to_calculate.push(r) if !has_historical_data
         elsif r.trigger == 'When employee has historical data'
@@ -205,20 +221,27 @@ class OptionsCalculationsController < ApplicationController
         elsif r.trigger == 'Always'
           types_to_calculate.push(r)
         elsif r.trigger.include?('When field value has changed')
-          trigger_value_name = r.trigger.split(' - ')[-1]
-          last_value = get_previous_field(trigger_value_name, e)
-          curr_val = get_field(trigger_value_name, e)
-          puts last_value, curr_val
-          if curr_val != last_value and has_historical_data
-            types_to_calculate.push(r)
+          if has_historical_data
+            trigger_value_name = r.trigger.split(' - ')[-1]
+            last_value = get_previous_field(trigger_value_name, e, historical_data)
+            curr_val = get_field(trigger_value_name, e, employee_data)
+            puts last_value, curr_val
+            if curr_val != last_value and has_historical_data
+              puts "CHECKED THAT FIELD VALUE HAS CHANGED."
+              types_to_calculate.push(r)
+            end
           end
         else
           # Now it's set to Never
         end
       end
-      employee_data_to_append_to = EmployeeDatum.left_joins(:options_calculations).where(employee_id: e).where(options_calculations: nil)
+      puts types_to_calculate
+      # employee_data_to_append_to = EmployeeDatum.left_joins(:options_calculations).where(employee_id: e).where(options_calculations: nil)
+      employee_data_to_append_to = employee_data
+      puts employee_data_to_append_to.pluck(:value)
       # now I have the grant types that should trigger
       types_to_calculate.each do |t|
+        puts t.grant_type.name
         vesting_start = Date.today
         # evaluate vesting_start_date
         if t.vesting_start.include?('offset_from_grant_date')
@@ -226,43 +249,38 @@ class OptionsCalculationsController < ApplicationController
           vesting_start = offset_from_grant_date(arg.to_i, params[:grant_date]).to_date
         elsif t.vesting_start.include? 'formula - '
           formula = t.vesting_start.split('formula - ')[-1]
-          vesting_start = evaluate_custom_formula(formula, e, get_field('Hire date', e), params[:grant_date], 0).to_date
+          vesting_start = evaluate_custom_formula(formula, e, hire_date, params[:grant_date], 0, employee_data, historical_data).to_date
         else
           vesting_start = t.vesting_start.to_date
         end
-
         cliff = 0
         if t.cliff.include? 'formula - '
           formula = t.cliff.split('formula - ')[-1]
-          cliff = evaluate_custom_formula(formula, e, get_field('Hire date', e), params[:grant_date], 0).to_i
+          cliff = evaluate_custom_formula(formula, e, hire_date, params[:grant_date], 0, employee_data, historical_data).to_i
         else
           cliff = t.cliff.to_i
         end
-
         tranches = 0
         if t.tranches.include? 'formula - '
           formula = t.tranches.split('formula - ')[-1]
-          tranches = evaluate_custom_formula(formula, e, get_field('Hire date', e), params[:grant_date], cliff).to_i
+          tranches = evaluate_custom_formula(formula, e, hire_date, params[:grant_date], cliff, employee_data, historical_data).to_i
         elsif t.tranches.include? 'Until the nth anniversary'
           arg = t.tranches.split('(')[1].split(')')[0]
-          tranches = until_the_nth_anniversary(arg.to_i, params[:grant_date], get_field('Hire date', e), cliff).to_i
+          tranches = until_the_nth_anniversary(arg.to_i, params[:grant_date], hire_date, cliff).to_i
         else
           tranches = t.tranches.to_i
         end
-
         vesting_end = vesting_start + cliff.months + tranches.months
-
         # calculate the grant amount
         share_number = 0
         if t.share_number.include? 'formula - '
           formula = t.share_number.split('formula - ')[-1]
-          share_number = evaluate_custom_formula(formula, e, get_field('Hire date', e), params[:grant_date], cliff).to_i
+          share_number = evaluate_custom_formula(formula, e, hire_date, params[:grant_date], cliff, employee_data, historical_data).to_i
         else
           share_number = t.share_number.to_i
         end
 
         #employee_data_to_append_to = EmployeeDatum.where(employee_id: e).filter {|it| !it.options_calculations.present? }\
-
         #employee_data_to_append_to.each do |dat|
         OptionsCalculation.create!(employee_id: e,
         grant_date: params[:grant_date],
@@ -277,6 +295,7 @@ class OptionsCalculationsController < ApplicationController
         #end
       end
     end
+    redirect_to options_calculations_path, notice: t('shared.options_calculated')
   end
 
   # GET /options_calculations/1 or /options_calculations/1.json

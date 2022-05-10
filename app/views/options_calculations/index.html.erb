@@ -52,8 +52,13 @@
                                 <%= calc.send(col_name).name %>
                               </td>
                               <% else %>
-                                <td>
-                                  <%= calc.send(col_name) %>
+                                <td style="<%= calc.share_number <= 0 and col_name == "share_number" ? "color:red;" : "" %>">
+                                  <% if col_name=="share_number" %>
+                                    <%= calc.share_number.to_i %>
+                                  <% else %>
+                                    <%= calc.send(col_name) %>
+                                  <% end %>
+
                                 </td>
                                 <% end %>
                                   <% end %>

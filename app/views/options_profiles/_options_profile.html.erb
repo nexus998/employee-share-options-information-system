@@ -20,7 +20,7 @@
                     <% if options_profile.options_profile_maps.size > 0 %>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Mapped data to this profile</h6>
+                            <h6 class="m-0 font-weight-bold text-primary"><%= t('shared.profile.mapped_data') %></h6>
                             <!--<div class="h8 mb-0 text-gray-800">Please confirm that the imported data is correct.</div> -->
                         </div>
                         <div class="card-body">
@@ -46,7 +46,7 @@
                                                     <% split.each do |spl| %>
                                                         <tr>
                                                             <% field_value = spl.split('-') %>
-                                                            <td><%= "Mapping " + count.to_s %></td>
+                                                            <td><%= t('shared.profile.mapping') + count.to_s %></td>
                                                             <td><%= Field.find_by(id: field_value[0]).name %></td>
                                                             <td><%= field_value[1] %></td>
                                                         </tr>

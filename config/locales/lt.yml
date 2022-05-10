@@ -35,7 +35,8 @@ lt:
     create: "Įrašas(-ai) sėkmingai sukurtas(-i)."
     update: "Įrašas(-ai) sėkmingai atnaujintas(-i)."
     destroy: "Įrašas(-ai) sėkmingai ištrintas(-i)."
-    remove_calcs: "Skaičiai sėkmingai pašalinti."
+    remove_calcs: "Skaičiavimai sėkmingai pašalinti."
+    verified_calcs: "%{amount} opcionų paketai buvo sėkmingai patvirtinti."
 
 
   shared:
@@ -48,6 +49,7 @@ lt:
     edit: "Redaguoti"
     select_file: "Pasirinkti failą"
     import: "Įkelti"
+    options_calculated: "Opcionai sėkmingai apskaičiuoti."
 
     valuation:
       market_price: "Rinkos kaina"
@@ -79,7 +81,8 @@ lt:
       until_n_guide: "Naudojant šį metodą paskaičiuojama kiek likę segmentų iki pasirinktų darbuotojo įsidarbinimo metinių."
     profile:
       num_shares: "Opcionų kiekis"
-      mapped_data: "Pritaikyti duomenys šiam profiliui."
+      mapped_data: "Pritaikyti duomenys šiam profiliui"
+      mapping: "Sąsaja "
       map_row: "Susieti duomenys"
       field: "Laukelis"
       value: "Reikšmė"
@@ -121,6 +124,14 @@ lt:
       options_profile:
         label: "Žymė"
         monetary_value: "Opcionų kiekis"
+      options_calculation:
+        grant_date: "Išdavimo data"
+        vesting_start_date: "Kaupimosi pradžios data"
+        cliff: "Cliff"
+        grant_type_id: "Paketo tipas"
+        tranches: "Segmentai"
+        share_number: "Opcionų kiekis"
+        trigger: "Sąlyga"
 
 
 
@@ -137,8 +148,8 @@ lt:
     amount_per_type: "Opcionų kiekis pagal paketo tipą"
 
   topbar:
-    switch_to_admin: "Prisijungti kaip administratorius"
-    switch_to_participant: "Prisijungti kaip darbuotojas"
+    switch_to_admin: "Administratoriaus rolė"
+    switch_to_participant: "Darbuotojo rolė"
     logout: "Atsijungti"
 
 
@@ -279,7 +290,8 @@ lt:
       edit_profiles: "Redaguoti opcionų profilius"
       no_calcs_html: "Šiuo metu nėra apskaičiuotų opcionų sukeltiems darbuotojams. Tai galite padaryti <a href=\"/options_calculations/new\">čia</a>."
       note: "Dėmesio: paskutinis opcionas buvo apskaičiuotas %{last}."
-
+    edit:
+      title: "Redaguojamas opcionų skaičiavimas"
     new:
       title: "Opcionų skaičiavimas"
       description_html: "<p>

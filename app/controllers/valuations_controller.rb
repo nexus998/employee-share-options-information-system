@@ -29,10 +29,8 @@ class ValuationsController < ApplicationController
     respond_to do |format|
       if @valuation.save
         format.html { redirect_to valuation_url(@valuation), notice: t('notices.create') }
-        format.json { render :show, status: :created, location: @valuation }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @valuation.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,10 +40,8 @@ class ValuationsController < ApplicationController
     respond_to do |format|
       if @valuation.update(valuation_params)
         format.html { redirect_to valuation_url(@valuation), notice: t('notices.update') }
-        format.json { render :show, status: :ok, location: @valuation }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @valuation.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +52,6 @@ class ValuationsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to valuations_url, notice: t('notices.destroy') }
-      format.json { head :no_content }
     end
   end
 
