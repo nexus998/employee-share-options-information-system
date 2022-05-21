@@ -1,0 +1,165 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">
+            <%=t('sidebar.title') %>
+        </div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item <%= current_page?(controller: 'pages', action: 'home') ? " active" : "" %>">
+        <a class="nav-link" href="/<%=I18n.locale%>/dashboard">
+            <%= material_icon.dashboard.md_24 %>
+                <span>
+                    <%=t('sidebar.dashboard') %>
+                </span>
+        </a>
+    </li>
+
+    <li class="nav-item <%= current_page?(controller: 'formula_reference') ? " active" : "" %>">
+        <a class="nav-link" href=<%=docs_formula_reference_path %>>
+            <%= material_icon.description.md_24 %>
+                <span>
+                    <%=t('sidebar.docs') %>
+                </span>
+        </a>
+    </li>
+
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        <%=t('sidebar.setup') %>
+    </div>
+
+    <li class="nav-item <%= current_page?(controller: 'participants') ? " active" : "" %>">
+        <a class="nav-link" href=<%=participants_path %>>
+            <%= material_icon.person.md_24 %>
+                <span>
+                    <%=t('sidebar.participants_title') %>
+                </span>
+        </a>
+    </li>
+
+    <li class="nav-item <%= current_page?(controller: 'valuations') ? " active" : "" %>">
+        <a class="nav-link" href=<%=valuations_path %>>
+            <%= material_icon.attach_money.md_24 %>
+                <span>
+                    <%=t('sidebar.valuations_title') %>
+                </span>
+        </a>
+    </li>
+
+    <li class="nav-item <%= current_page?(controller: 'fields') ? " active" : "" %>">
+        <a class="nav-link" href=<%=fields_path %>>
+            <%= material_icon.format_list_bulleted.md_24 %>
+                <span>
+                    <%=t('sidebar.report_fields') %>
+                </span>
+        </a>
+    </li>
+
+    <li class="nav-item <%= current_page?(controller: 'grant_types') ? " active" : "" %>">
+        <a class="nav-link" href=<%=grant_types_path %>>
+            <%= material_icon.format_list_bulleted.md_24 %>
+                <span>
+                    <%=t('sidebar.grant_types_title') %>
+                </span>
+        </a>
+    </li>
+
+
+
+
+    <li class="nav-item <%= current_page?(controller: 'grant_rules') ? " active" : "" %>">
+        <a class="nav-link" href=<%=grant_rules_path %>>
+            <%= material_icon.gavel.md_24 %>
+                <span>
+                    <%=t('sidebar.grant_rules_title') %>
+                </span>
+        </a>
+    </li>
+
+    <li class="nav-item <%= current_page?(controller: 'options_profiles') ? " active" : "" %>">
+        <a class="nav-link" href=<%=options_profiles_path %>>
+            <%= material_icon.format_list_bulleted.md_24 %>
+                <span>
+                    <%=t('sidebar.profiles') %>
+                </span>
+        </a>
+    </li>
+
+    <li class="nav-item <%= current_page?(controller: 'options_profile_maps', action: 'new') ? " active" : "" %>">
+        <a class="nav-link" href=<%=options_profile_mapping_new_path %>>
+            <%= material_icon.file_upload.md_24 %>
+                <span>
+                    <%=t('sidebar.profiles_map') %>
+                </span>
+        </a>
+    </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        <%=t('sidebar.granting') %>
+    </div>
+
+    <li class="nav-item <%= current_page?(controller: 'employee_data') ? " active" : "" %>">
+        <a class="nav-link" href=<%=new_employee_datum_path + '?force=false' %>>
+            <%= material_icon.person.md_24 %>
+                <span>
+                    <%=t('sidebar.import_emp_data') %>
+                </span>
+        </a>
+    </li>
+
+    <li class="nav-item <%= current_page?(controller: 'options_calculations', action: 'new') ? " active" : "" %>">
+        <a class="nav-link" href=<%=new_options_calculation_path %>>
+            <%= material_icon.functions.md_24 %>
+                <span>
+                    <%=t('sidebar.calculate_options') %>
+                </span>
+        </a>
+    </li>
+    <li class="nav-item <%= current_page?(controller: 'options_calculations', action: 'index') ? " active" : "" %>">
+        <a class="nav-link" href=<%=options_calculations_path %>>
+            <%= material_icon.done.md_24 %>
+                <span>
+                    <%=t('sidebar.verify_calcs') %>
+                </span>
+        </a>
+    </li>
+
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+    <div class="sidebar-heading">
+        <%=t('sidebar.historical_data') %>
+    </div>
+
+    <li class="nav-item <%= current_page?(controller: 'options_calculations', action: 'ledger') ? " active" : "" %>">
+        <a class="nav-link" href=<%=ledger_options_calculations_path %>>
+            <%= material_icon.folder_open.md_24 %>
+                <span>
+                    <%=t('sidebar.options_ledger') %>
+                </span>
+        </a>
+    </li>
+
+</ul>

@@ -13,10 +13,10 @@
   </head>
   <body id="page-top">
     <div id="wrapper">
-        <%= render 'pages/admin_sidebar' %>
+        <%= render 'shared/admin_sidebar' %>
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                <%= render 'pages/admin_header' %>
+                <%= render 'shared/admin_header' %>
                 <div class="container-fluid">
 
                   <div class="alert alert-success alert-dismissible fade show" style="display:<%= notice.present? ? "block" : "none" %>;">
@@ -35,7 +35,7 @@
                 </div>
 
             </div>
-            <%= render 'pages/footer' %>
+            <%= render 'shared/footer' %>
         </div>
 
     </div>

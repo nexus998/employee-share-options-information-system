@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -11,7 +11,7 @@ module EmployeeShareOptions
     # Use the responders controller from the responders gem
     config.app_generators.scaffold_controller :responders_controller
 
-    config.middleware.use Rack::RubyProf, :path => './tmp/profile'
+    # config.middleware.use Rack::RubyProf, :path => './tmp/profile'
 
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
@@ -24,7 +24,7 @@ module EmployeeShareOptions
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.i18n.available_locales = [:en, :lt]
+    config.i18n.available_locales = %i[en lt]
     config.i18n.default_locale = :lt
     # config.i18n.fallbacks = true
   end

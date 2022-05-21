@@ -1,89 +1,56 @@
-
-<div class="" id="<%= dom_id options_profile %>">
-    <div class="card border-left-primary py-2">
+<% content_for :title, flush: true do %>
+    <b><%= options_profile.label %></b>
+<% end %>
+<%= render 'shared/dropdown_item', {d: dom_id(options_profile), edit_path: edit_options_profile_path(options_profile), obj: options_profile, opened: false} do %>
+    <div style="padding-right:1rem;">
+        <%= t('shared.profile.num_shares') %> - <b><%= options_profile.monetary_value %></b>
+    </div>
+    <br>
+    <% if options_profile.options_profile_maps.size > 0 %>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"><%= t('shared.profile.mapped_data') %></h6>
+            <!--<div class="h8 mb-0 text-gray-800">Please confirm that the imported data is correct.</div> -->
+        </div>
         <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<%= dom_id options_profile %>">
-                    <div class="col mr-2">
-                        <div class="text-xl font-weight-bold text-primary mb-1">
-                          <%= options_profile.label %> </span>
-                        </div>
-                    </div>
-                </button>
-            </div>
-            <div id="collapse_<%= dom_id options_profile %>" class="accordion-collapse collapse" data-bs-parent="#<%= dom_id options_profile %>">
-                <div class="accordion-body">
-                    <div style="padding-right:1rem;">
-                        <%= t('shared.profile.num_shares') %> - <b><%= options_profile.monetary_value %></b>
-                    </div>
-                    <br>
-                    <% if options_profile.options_profile_maps.size > 0 %>
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"><%= t('shared.profile.mapped_data') %></h6>
-                            <!--<div class="h8 mb-0 text-gray-800">Please confirm that the imported data is correct.</div> -->
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                        <br>
-                                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th style="width: auto;"><%= t('shared.profile.map_row') %></th>
-                                                    <th style="width: auto;"><%= t('shared.profile.field') %></th>
-                                                    <th style="width: auto;"><%= t('shared.profile.value') %></th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <% count = 1 %>
-                                                <% options_profile.options_profile_maps.each do |m| %>
-
-                                                    <% split = m.values.split(',') %>
-                                                    <% split.each do |spl| %>
-                                                        <tr>
-                                                            <% field_value = spl.split('-') %>
-                                                            <td><%= t('shared.profile.mapping') + count.to_s %></td>
-                                                            <td><%= Field.find_by(id: field_value[0]).name %></td>
-                                                            <td><%= field_value[1] %></td>
-                                                        </tr>
-                                                    <% end %>
-                                                    <% count += 1 %>
-                                                <% end %>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    <% elsif %>
-                    <p><%= t('shared.profile.empty_html') %></p>
-                    <% end %>
-                    <br>
-                    <span style="display:inline-flex; flex-wrap:wrap;gap:0.25rem;">
-                        <a href="<%= edit_options_profile_path(options_profile) %>" class="btn btn-primary btn-icon-split">
-                            <span class="icon text-white-50">
-                                <%= material_icon.edit.md_18 %>
-                            </span>
-
-                            <span class="text"><%= t('shared.edit') %></span>
-                        </a>
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
                         <br>
-                        <%= button_to options_profile, class: "btn btn-danger btn-icon-split", method: :delete, data: {"confirm": "Are you sure?"} do %>
-                            <span class="icon text-white-50">
-                                <%= material_icon.delete %>
-                            </span>
-                            <span class="text"><%= t('shared.delete') %></span>
-                        <% end %>
-                    </span>
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead>
+                                <tr role="row">
+                                    <th style="width: auto;"><%= t('shared.profile.map_row') %></th>
+                                    <th style="width: auto;"><%= t('shared.profile.field') %></th>
+                                    <th style="width: auto;"><%= t('shared.profile.value') %></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% count = 1 %>
+                                <% options_profile.options_profile_maps.each do |m| %>
+
+                                    <% split = m.values.split(',') %>
+                                    <% split.each do |spl| %>
+                                        <tr>
+                                            <% field_value = spl.split('-') %>
+                                            <td><%= t('shared.profile.mapping') + count.to_s %></td>
+                                            <td><%= Field.find_by(id: field_value[0]).name %></td>
+                                            <td><%= field_value[1] %></td>
+                                        </tr>
+                                    <% end %>
+                                    <% count += 1 %>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
-
-</div>
+    <% elsif %>
+    <p><%= t('shared.profile.empty_html') %></p>
+    <% end %>
+<% end %>

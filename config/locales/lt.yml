@@ -50,6 +50,7 @@ lt:
     select_file: "Pasirinkti failą"
     import: "Įkelti"
     options_calculated: "Opcionai sėkmingai apskaičiuoti."
+    search_names: "Ieškoti pagal vardą..."
 
     valuation:
       market_price: "Rinkos kaina"

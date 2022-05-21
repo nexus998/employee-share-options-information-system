@@ -1,44 +1,11 @@
-<div class="" id="<%= dom_id field %>">
-    <div class="card border-left-primary py-2">
-        <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<%= dom_id field %>">
-                    <div class="col mr-2">
-                        <div class="text-xl font-weight-bold text-primary mb-1">
-                          <%= field.name %> </span>
-                        </div>
-                    </div>
-                </button>
-            </div>
-            <div id="collapse_<%= dom_id field %>" class="accordion-collapse collapse" data-bs-parent="#<%= dom_id field %>">
-                        <div class="accordion-body">
-                            <div style="padding-right:1rem;">
-                                <%= field.description %></b>
-                            </div>
-                            <div style="padding-right:1rem;">
-                                <%= t('shared.field.field_type_html', field_type: translate_field_type(field.field_type)) %>
-                            </div>
-
-                            <br>
-                            <span style="display:inline-flex; flex-wrap:wrap;gap:0.25rem;">
-                                <a href="<%= edit_field_path(field) %>" class="btn btn-primary btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <%= material_icon.edit.md_18 %>
-                                    </span>
-
-                                    <span class="text"><%= t('shared.edit') %></span>
-                                </a>
-                                <br>
-                                <%= button_to field, class: "btn btn-danger btn-icon-split", method: :delete, data: {"confirm": "Are you sure?"} do %>
-                                    <span class="icon text-white-50">
-                                        <%= material_icon.delete %>
-                                    </span>
-                                    <span class="text"><%= t('shared.delete') %></span>
-                                <% end %>
-                            </span>
-                        </div>
-                    </div>
-        </div>
+<% content_for :title, flush: true do %>
+    <b><%= field.name %></b>
+<% end %>
+<%= render 'shared/dropdown_item', {d: dom_id(field), edit_path: edit_field_path(field), obj: field, opened: false} do %>
+    <div style="padding-right:1rem;">
+        <%= field.description %></b>
     </div>
-
-</div>
+    <div style="padding-right:1rem;">
+        <%= t('shared.field.field_type_html', field_type: translate_field_type(field.field_type)) %>
+    </div>
+<% end %>

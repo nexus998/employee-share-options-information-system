@@ -6,7 +6,7 @@ class EmployeeDataController < ApplicationController
 
   def import
     # puts EmployeeDatum.all.filter { |e| !e.options_calculations.present? }.class
-    EmployeeDatum.left_joins(:options_calculations).where(options_calculations: nil).destroy_all
+    EmployeeDatum.with_no_assigned_calculations.destroy_all
     EmployeeDatum.import(params[:file])
     redirect_to employee_data_path, notice: t('notices.imported')
   end
@@ -15,7 +15,7 @@ class EmployeeDataController < ApplicationController
   def index
     # @employee_data = EmployeeDatum.all.filter { |e| !e.options_calculations.present? }
     # @fields = Field.all
-    @exists = EmployeeDatum.left_joins(:options_calculations).where(options_calculations: nil).size > 0
+    @exists = EmployeeDatum.with_no_assigned_calculations.size > 0
     unless @exists
       redirect_to new_employee_datum_path
       return
@@ -30,7 +30,7 @@ class EmployeeDataController < ApplicationController
   def new
     @employee_datum = EmployeeDatum.new
     # if non calculated employee data exists, show the table.
-    @data_exists = EmployeeDatum.left_joins(:options_calculations).where(options_calculations: nil).size > 0
+    @data_exists = EmployeeDatum.with_no_assigned_calculations.size > 0
     # if EmployeeDatum.all.filter {|e| !e.options_calculations.present?}.size != 0
     redirect_to employee_data_path if @data_exists && !(params[:force] == 'true')
   end

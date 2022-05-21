@@ -50,6 +50,7 @@ en:
     select_file: "Select file"
     import: "Import"
     options_calculated: "Options calculated successfully."
+    search_names: "Search by name..."
 
     valuation:
       market_price: "Market price"
