@@ -6,7 +6,7 @@ class UserDashboardController < ApplicationController
   include OptionsCalculationsHelper
 
   def index
-    @calculations = OptionsCalculation.where(employee_id: current_user.employee_id)
+    @calculations = OptionsCalculation.verified.belonging_to_user(current_user)
 
     # find the relevant market price for given grants
 
@@ -60,12 +60,12 @@ class UserDashboardController < ApplicationController
   end
 
   def documents
-    @options_calculations = OptionsCalculation.belonging_to_user(current_user)
+    @options_calculations = OptionsCalculation.verified.belonging_to_user(current_user)
     @options_calculations_size = @options_calculations.size
   end
 
   def calculated_options
-    @options_calculations = OptionsCalculation.belonging_to_user(current_user)
+    @options_calculations = OptionsCalculation.verified.belonging_to_user(current_user)
     @column_names = OptionsCalculation.get_relevant_column_names
     @column_names_edited = OptionsCalculation.get_pretty_column_names
   end
