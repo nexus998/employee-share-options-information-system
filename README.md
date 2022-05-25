@@ -1,4 +1,6 @@
-# README
+# Darbuotojų opcionų informacinė sistema
+
+** Autorius: Mindaugas Morkūnas PRIf-18/4**
 
 Ši sistema yra skirta bakalauro baigiamojo darbo atsiskaitymui.
 
@@ -16,8 +18,10 @@ Reikalingos versijos:
 
 1. Atsisiuntus projektą, reikia paruošt Google Cloud Project projektą ir nustatyti naują OAuth2 Client ID.
 2. Gavus Client ir Secret kodus, reikia juos įdėti į `application.yml` failą, kurį reikia sukurti `config/` aplankale.
-    `application.yml` pavyzdys:
-    `google_client: čia dedamas kliento kodas`
-    `google_secret: čia dedamas secret kodas`
+    **application.yml** pavyzdys:
+    ```
+    google_client: čia dedamas kliento kodas
+    google_secret: čia dedamas secret kodas
+    ```
 3. Turint kodus, per Terminal komandinę eilutę įvesti `rails s`
 4. Per naršyklę prisijungti į `localhost:3000`
