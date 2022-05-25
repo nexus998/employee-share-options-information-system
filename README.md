@@ -27,4 +27,5 @@ https://support.google.com/cloud/answer/6158849?hl=en
     google_secret: čia dedamas secret kodas
     ```
 3. Turint kodus, per Terminal komandinę eilutę įvesti `rails s`
-4. Per naršyklę prisijungti į `localhost:3000`
+4. Jei neveikia, per Terminal įvesti `bundle install`
+5. Per naršyklę prisijungti į `localhost:3000`
