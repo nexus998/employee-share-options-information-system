@@ -17,6 +17,7 @@ Reikalingos versijos:
 # Sistemos paleidimas:
 
 1. Atsisiuntus projektą, reikia paruošt Google Cloud Project projektą ir nustatyti naują OAuth2 Client ID.
+https://support.google.com/cloud/answer/6158849?hl=en
 2. Gavus Client ir Secret kodus, reikia juos įdėti į `application.yml` failą, kurį reikia sukurti `config/` aplankale.
 
     **application.yml** pavyzdys:
